@@ -1,0 +1,590 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pengaturan - Glow N Dry</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+
+  <style>
+    :root {
+      --settings-blue: #2878d0;
+      --settings-blue-dark: #1455a0;
+      --settings-blue-light: #eaf3ff;
+      --settings-text: #183451;
+      --settings-muted: #718198;
+      --settings-border: #e0eafa;
+      --settings-white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+
+    body.gnd-settings-body {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      min-height: 100vh;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow-x: clip;
+
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(181, 211, 255, 0.4),
+          transparent 30%
+        ),
+        linear-gradient(
+          180deg,
+          #f1f6ff 0%,
+          #f8faff 60%,
+          #edf4ff 100%
+        );
+
+      color: var(--settings-text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HALAMAN */
+
+    body.gnd-settings-body > .gnd-settings-page {
+      position: relative;
+      left: auto;
+      right: auto;
+      transform: none;
+
+      width: 100%;
+      max-width: 600px;
+      min-width: 0;
+      min-height: 100vh;
+
+      margin: 0 auto !important;
+      padding: 24px 20px 115px;
+
+      box-sizing: border-box;
+    }
+
+    /* HEADER */
+
+    .gnd-settings-page .gnd-page-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 0 0 27px;
+    }
+
+    .gnd-settings-page .gnd-page-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 44px;
+
+      width: 44px;
+      height: 44px;
+
+      border: 1px solid var(--settings-border);
+      border-radius: 14px;
+
+      background: #ffffff;
+      color: var(--settings-blue);
+
+      font-size: 28px;
+      text-decoration: none;
+
+      box-shadow: 0 5px 15px rgba(35, 82, 140, 0.06);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .gnd-settings-page .gnd-page-back:hover {
+      background: var(--settings-blue-light);
+      transform: translateX(-2px);
+    }
+
+    .gnd-settings-page .gnd-page-header h1 {
+      margin: 0 0 5px;
+      color: #183e6b;
+      font-size: 26px;
+      font-weight: 850;
+      letter-spacing: -0.6px;
+      line-height: 1.3;
+    }
+
+    .gnd-settings-page .gnd-page-header p {
+      margin: 0;
+      color: var(--settings-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* KARTU PENGATURAN */
+
+    .gnd-settings-page .gnd-settings-card {
+      width: 100%;
+      min-width: 0;
+
+      padding: 21px;
+      margin-bottom: 20px;
+
+      border: 1px solid var(--settings-border);
+      border-radius: 21px;
+
+      background: #ffffff;
+      box-shadow: 0 9px 25px rgba(37, 87, 148, 0.06);
+    }
+
+    .gnd-settings-page .gnd-settings-card h2 {
+      margin: 0 0 14px;
+
+      color: #183e6b;
+      font-size: 16px;
+      font-weight: 850;
+      letter-spacing: -0.2px;
+    }
+
+    /* BARIS PREFERENSI */
+
+    .gnd-settings-page .gnd-setting-row {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+
+      min-width: 0;
+      padding: 15px 0;
+
+      border-bottom: 1px solid #edf2fa;
+    }
+
+    .gnd-settings-page .gnd-setting-row:first-of-type {
+      padding-top: 5px;
+    }
+
+    .gnd-settings-page .gnd-setting-row:last-child {
+      padding-bottom: 5px;
+      border-bottom: none;
+    }
+
+    /* IKON */
+
+    .gnd-settings-page .gnd-setting-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 44px;
+
+      width: 44px;
+      height: 44px;
+
+      border-radius: 14px;
+      background: linear-gradient(145deg, #e6f1ff, #f2f7ff);
+
+      color: var(--settings-blue);
+      font-size: 22px;
+    }
+
+    /* TEKS */
+
+    .gnd-settings-page .gnd-setting-text {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 6px;
+
+      min-width: 0;
+    }
+
+    .gnd-settings-page .gnd-setting-text strong {
+      color: #244565;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
+    .gnd-settings-page .gnd-setting-text small {
+      color: #8391a6;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    /* TOGGLE */
+
+    .gnd-settings-page .gnd-switch {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+
+      flex: 0 0 47px;
+      width: 47px;
+      height: 27px;
+
+      margin-left: 5px;
+      cursor: pointer;
+    }
+
+    .gnd-settings-page .gnd-switch input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+
+    .gnd-settings-page .gnd-switch-slider {
+      position: absolute;
+      inset: 0;
+
+      border: 1px solid #d4dfed;
+      border-radius: 999px;
+
+      background: #e3eaf3;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .gnd-settings-page .gnd-switch-slider::before {
+      content: "";
+
+      position: absolute;
+      top: 3px;
+      left: 3px;
+
+      width: 19px;
+      height: 19px;
+
+      border-radius: 50%;
+      background: #ffffff;
+
+      box-shadow: 0 2px 5px rgba(30, 54, 86, 0.16);
+      transition: transform 0.2s;
+    }
+
+    .gnd-settings-page .gnd-switch input:checked
+      + .gnd-switch-slider {
+      border-color: var(--settings-blue);
+      background: var(--settings-blue);
+    }
+
+    .gnd-settings-page .gnd-switch input:checked
+      + .gnd-switch-slider::before {
+      transform: translateX(20px);
+    }
+
+    .gnd-settings-page .gnd-switch input:focus-visible
+      + .gnd-switch-slider {
+      outline: 3px solid rgba(40, 120, 208, 0.2);
+      outline-offset: 3px;
+    }
+
+    /* LINK PENGATURAN */
+
+    .gnd-settings-page .gnd-setting-link {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+
+      min-width: 0;
+      padding: 14px 0;
+
+      border-bottom: 1px solid #edf2fa;
+
+      color: var(--settings-text);
+      text-decoration: none;
+
+      transition: background 0.2s;
+    }
+
+    .gnd-settings-page .gnd-setting-link:first-of-type {
+      padding-top: 5px;
+    }
+
+    .gnd-settings-page .gnd-setting-link:last-child {
+      padding-bottom: 5px;
+      border-bottom: none;
+    }
+
+    .gnd-settings-page .gnd-setting-link:hover {
+      background: #f8fbff;
+    }
+
+    .gnd-settings-page .gnd-setting-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 28px;
+
+      width: 28px;
+      height: 28px;
+
+      border-radius: 9px;
+      background: #f0f6ff;
+      color: #5591d5;
+
+      font-size: 21px;
+      transition: transform 0.2s;
+    }
+
+    .gnd-settings-page .gnd-setting-link:hover
+      .gnd-setting-arrow {
+      transform: translateX(3px);
+    }
+
+    /* PESAN */
+
+    .gnd-settings-page .gnd-settings-message:empty {
+      display: none;
+    }
+
+    .gnd-settings-page .gnd-settings-message:not(:empty) {
+      padding: 12px 14px;
+      margin: 0 0 20px;
+
+      border: 1px solid #d7e7fc;
+      border-radius: 12px;
+
+      background: #edf5ff;
+      color: #245d9c;
+
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /* NAVIGASI BAWAH */
+
+    body.gnd-settings-body .gnd-bottom-nav {
+      position: fixed !important;
+      z-index: 100;
+
+      left: 50% !important;
+      right: auto !important;
+      bottom: 0 !important;
+
+      transform: translateX(-50%) !important;
+
+      display: flex;
+      align-items: stretch;
+      justify-content: space-around;
+      gap: 5px;
+
+      width: 100% !important;
+      max-width: 600px !important;
+      min-width: 0 !important;
+      min-height: 76px;
+
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      margin: 0 !important;
+
+      border: 1px solid var(--settings-border);
+      border-bottom: none;
+      border-radius: 22px 22px 0 0;
+
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 -8px 28px rgba(37, 87, 148, 0.09);
+
+      backdrop-filter: blur(14px);
+    }
+
+    .gnd-settings-page .gnd-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      flex: 1 1 0;
+      flex-direction: column;
+      gap: 5px;
+
+      min-width: 0;
+      padding: 5px 2px;
+
+      border-radius: 13px;
+
+      color: #8593a8;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .gnd-settings-page .gnd-nav-icon {
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .gnd-settings-page .gnd-nav-item.active {
+      color: var(--settings-blue);
+    }
+
+    .gnd-settings-page .gnd-nav-item:hover {
+      background: #f0f6ff;
+      color: var(--settings-blue-dark);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 600px) {
+      body.gnd-settings-body > .gnd-settings-page {
+        padding: 20px 15px 110px;
+      }
+
+      .gnd-settings-page .gnd-page-header h1 {
+        font-size: 24px;
+      }
+
+      .gnd-settings-page .gnd-settings-card {
+        padding: 18px;
+        border-radius: 19px;
+      }
+
+      .gnd-settings-page .gnd-setting-row,
+      .gnd-settings-page .gnd-setting-link {
+        gap: 10px;
+      }
+
+      body.gnd-settings-body .gnd-bottom-nav {
+        max-width: 100% !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gnd-settings-page * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="gnd-settings-body">
+
+  <main class="gnd-settings-page">
+
+    <!-- HEADER -->
+    <header class="gnd-page-header">
+      <a href="profile.html" class="gnd-page-back" aria-label="Kembali">
+        ‹
+      </a>
+
+      <div>
+        <h1>Pengaturan</h1>
+        <p>Atur preferensi aplikasi kamu</p>
+      </div>
+    </header>
+
+    <!-- PREFERENSI -->
+    <section class="gnd-settings-card">
+      <h2>Preferensi</h2>
+
+      <div class="gnd-setting-row">
+        <div class="gnd-setting-icon" aria-hidden="true">♧</div>
+
+        <div class="gnd-setting-text">
+          <strong>Notifikasi</strong>
+          <small>Aktifkan pemberitahuan aplikasi</small>
+        </div>
+
+        <label class="gnd-switch" aria-label="Aktifkan notifikasi">
+          <input
+            type="checkbox"
+            id="notificationSetting"
+            checked
+          >
+          <span class="gnd-switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="gnd-setting-row">
+        <div class="gnd-setting-icon" aria-hidden="true">☾</div>
+
+        <div class="gnd-setting-text">
+          <strong>Mode gelap</strong>
+          <small>Gunakan tampilan gelap</small>
+        </div>
+
+        <label class="gnd-switch" aria-label="Aktifkan mode gelap">
+          <input
+            type="checkbox"
+            id="darkModeSetting"
+          >
+          <span class="gnd-switch-slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- AKUN DAN INFORMASI -->
+    <section class="gnd-settings-card">
+      <h2>Akun dan Informasi</h2>
+
+      <a href="profile.html" class="gnd-setting-link">
+        <span class="gnd-setting-icon" aria-hidden="true">♙</span>
+
+        <span class="gnd-setting-text">
+          <strong>Profil Saya</strong>
+          <small>Kelola informasi akun</small>
+        </span>
+
+        <span class="gnd-setting-arrow" aria-hidden="true">›</span>
+      </a>
+
+      <a href="store-info.html" class="gnd-setting-link">
+        <span class="gnd-setting-icon" aria-hidden="true">⌂</span>
+
+        <span class="gnd-setting-text">
+          <strong>Informasi Toko</strong>
+          <small>Alamat dan jam operasional</small>
+        </span>
+
+        <span class="gnd-setting-arrow" aria-hidden="true">›</span>
+      </a>
+
+      <a href="price-list.html" class="gnd-setting-link">
+        <span class="gnd-setting-icon" aria-hidden="true">▤</span>
+
+        <span class="gnd-setting-text">
+          <strong>Daftar Harga</strong>
+          <small>Informasi layanan laundry</small>
+        </span>
+
+        <span class="gnd-setting-arrow" aria-hidden="true">›</span>
+      </a>
+    </section>
+
+    <p
+      id="settingsMessage"
+      class="gnd-settings-message"
+      role="status"
+      aria-live="polite"
+    ></p>
+
+    <!-- NAVIGASI BAWAH -->
+    <nav class="gnd-bottom-nav" aria-label="Navigasi utama">
+      <a href="home.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon">⌂</span>
+        <span>Beranda</span>
+      </a>
+
+      <a href="history.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon">▤</span>
+        <span>Riwayat</span>
+      </a>
+
+      <a href="profile.html" class="gnd-nav-item active">
+        <span class="gnd-nav-icon">♙</span>
+        <span>Profil</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <script src="../js/settings.js"></script>
+  <script src="../js/theme.js"></script>
+</body>
+</html>

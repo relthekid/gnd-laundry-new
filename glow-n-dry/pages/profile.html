@@ -1,0 +1,767 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Profil Saya - Glow N Dry</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+
+  <style>
+    :root {
+      --profile-blue: #2878d0;
+      --profile-blue-dark: #1455a0;
+      --profile-blue-light: #eaf3ff;
+      --profile-text: #183451;
+      --profile-muted: #718198;
+      --profile-border: #e0eafa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+
+    body.gnd-profile-body {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      min-height: 100vh;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow-x: clip;
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(181, 211, 255, 0.4),
+          transparent 30%
+        ),
+        linear-gradient(180deg, #f1f6ff, #f8faff 60%, #edf4ff);
+      color: var(--profile-text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.gnd-profile-body > .gnd-profile-page {
+      position: relative;
+      left: auto;
+      right: auto;
+      transform: none;
+      width: 100%;
+      max-width: 600px;
+      min-width: 0;
+      min-height: 100vh;
+      margin: 0 auto !important;
+      padding: 25px 20px 115px;
+      box-sizing: border-box;
+    }
+
+    /* HEADER */
+
+    .gnd-profile-page .gnd-profile-header {
+      margin: 0 0 23px;
+    }
+
+    .gnd-profile-page .gnd-profile-header h1 {
+      margin: 0 0 7px;
+      color: #183e6b;
+      font-size: 26px;
+      font-weight: 850;
+      letter-spacing: -0.6px;
+    }
+
+    .gnd-profile-page .gnd-profile-header p {
+      margin: 0;
+      color: var(--profile-muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* PROFILE HERO */
+
+    .gnd-profile-page .gnd-profile-hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      padding: 29px 20px 25px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 25px;
+      background: linear-gradient(
+        135deg,
+        #1455a0 0%,
+        #2878d0 57%,
+        #69adf5 100%
+      );
+      text-align: center;
+      box-shadow: 0 14px 30px rgba(40, 120, 208, 0.2);
+    }
+
+    .gnd-profile-page .gnd-profile-hero::before {
+      content: "";
+      position: absolute;
+      top: -75px;
+      right: -40px;
+      width: 190px;
+      height: 190px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.07);
+      pointer-events: none;
+    }
+
+    .gnd-profile-page .gnd-profile-hero::after {
+      content: "";
+      position: absolute;
+      bottom: -85px;
+      left: -40px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.07);
+      pointer-events: none;
+    }
+
+    .gnd-profile-page .gnd-profile-avatar {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 88px;
+      height: 88px;
+      margin-bottom: 15px;
+      border: 4px solid rgba(255, 255, 255, 0.85);
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ffffff, #d9eaff);
+      color: #2168b8;
+      font-size: 34px;
+      font-weight: 850;
+      text-transform: uppercase;
+      box-shadow: 0 8px 20px rgba(10, 47, 94, 0.2);
+    }
+
+    .gnd-profile-page .gnd-profile-hero h2 {
+      position: relative;
+      z-index: 1;
+      max-width: 100%;
+      margin: 0 0 7px;
+      color: #ffffff;
+      font-size: 21px;
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-profile-page .gnd-profile-hero p {
+      position: relative;
+      z-index: 1;
+      max-width: 100%;
+      margin: 0 0 18px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-profile-page .gnd-profile-edit {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 11px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.96);
+      color: #1455a0;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 5px 13px rgba(8, 43, 90, 0.1);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .gnd-profile-page .gnd-profile-edit:hover {
+      transform: translateY(-2px);
+      background: #eaf3ff;
+    }
+
+    /* KARTU INFORMASI DAN MENU */
+
+    .gnd-profile-page .gnd-profile-info,
+    .gnd-profile-page .gnd-profile-menu {
+      width: 100%;
+      min-width: 0;
+      padding: 21px;
+      margin-bottom: 20px;
+      border: 1px solid var(--profile-border);
+      border-radius: 21px;
+      background: #ffffff;
+      box-shadow: 0 9px 25px rgba(37, 87, 148, 0.06);
+    }
+
+    .gnd-profile-page .gnd-profile-info h3,
+    .gnd-profile-page .gnd-profile-menu h3 {
+      margin: 0 0 19px;
+      color: #183e6b;
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .gnd-profile-page .gnd-profile-info-row {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 0;
+      padding: 14px 0;
+      border-bottom: 1px solid #edf2fa;
+    }
+
+    .gnd-profile-page .gnd-profile-info-row:first-of-type {
+      padding-top: 0;
+    }
+
+    .gnd-profile-page .gnd-profile-info-row:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .gnd-profile-page .gnd-profile-info-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 43px;
+      width: 43px;
+      height: 43px;
+      border-radius: 14px;
+      background: #eaf3ff;
+      color: #2878d0;
+      font-size: 22px;
+    }
+
+    .gnd-profile-page .gnd-profile-info-row > div {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .gnd-profile-page .gnd-profile-info-row small {
+      color: #8593a8;
+      font-size: 11px;
+    }
+
+    .gnd-profile-page .gnd-profile-info-row strong {
+      color: #294866;
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    /* MENU PROFIL */
+
+    .gnd-profile-page .gnd-profile-menu {
+      padding-bottom: 8px;
+    }
+
+    .gnd-profile-page .gnd-profile-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      padding: 14px 0;
+      border-bottom: 1px solid #edf2fa;
+      color: var(--profile-text);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .gnd-profile-page .gnd-profile-menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .gnd-profile-page .gnd-profile-menu-item:hover {
+      background: #f8fbff;
+    }
+
+    .gnd-profile-page .gnd-menu-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 44px;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #e6f1ff, #f2f7ff);
+      color: #2878d0;
+      font-size: 22px;
+    }
+
+    .gnd-profile-page .gnd-menu-text {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .gnd-profile-page .gnd-menu-text strong {
+      color: #244565;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .gnd-profile-page .gnd-menu-text small {
+      color: #8391a6;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .gnd-profile-page .gnd-menu-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 28px;
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      background: #f0f6ff;
+      color: #5591d5;
+      font-size: 21px;
+      transition: transform 0.2s;
+    }
+
+    .gnd-profile-page .gnd-profile-menu-item:hover .gnd-menu-arrow {
+      transform: translateX(3px);
+    }
+
+    /* TOMBOL KELUAR */
+
+    .gnd-profile-page .gnd-profile-logout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      min-height: 49px;
+      padding: 13px 18px;
+      margin: 0 0 20px;
+      border: 1px solid #f2d6dc;
+      border-radius: 14px;
+      background: #fff4f5;
+      color: #bd3d50;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 850;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .gnd-profile-page .gnd-profile-logout:hover {
+      transform: translateY(-1px);
+      background: #ffe8ec;
+    }
+
+    /* NAVIGASI BAWAH */
+
+    body.gnd-profile-body .gnd-bottom-nav {
+      position: fixed !important;
+      z-index: 100;
+      left: 50% !important;
+      right: auto !important;
+      bottom: 0 !important;
+      transform: translateX(-50%) !important;
+
+      display: flex;
+      align-items: stretch;
+      justify-content: space-around;
+      gap: 5px;
+
+      width: 100% !important;
+      max-width: 600px !important;
+      min-width: 0 !important;
+      min-height: 76px;
+
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      margin: 0 !important;
+
+      border: 1px solid #e0eafa;
+      border-bottom: none;
+      border-radius: 22px 22px 0 0;
+
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 -8px 28px rgba(37, 87, 148, 0.09);
+      backdrop-filter: blur(14px);
+    }
+
+    .gnd-profile-page .gnd-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1 1 0;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 0;
+      padding: 5px 2px;
+      border-radius: 13px;
+      color: #8593a8;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .gnd-profile-page .gnd-nav-icon {
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .gnd-profile-page .gnd-nav-item.active {
+      color: #2878d0;
+    }
+
+    .gnd-profile-page .gnd-nav-item:hover {
+      background: #f0f6ff;
+      color: #1455a0;
+    }
+
+    /* MODAL EDIT PROFIL */
+
+    .gnd-profile-body .gnd-modal-overlay[hidden] {
+      display: none !important;
+    }
+
+    .gnd-profile-body .gnd-modal-overlay {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;
+      padding: 20px;
+      background: rgba(17, 42, 76, 0.52);
+      backdrop-filter: blur(5px);
+    }
+
+    .gnd-profile-body .gnd-profile-modal {
+      width: 100%;
+      max-width: 420px;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+      padding: 25px;
+      border: 1px solid #e0eafa;
+      border-radius: 23px;
+      background: #ffffff;
+      box-shadow: 0 20px 60px rgba(13, 45, 86, 0.2);
+    }
+
+    .gnd-profile-modal h2 {
+      margin: 0 0 22px;
+      color: #183e6b;
+      font-size: 22px;
+      font-weight: 850;
+    }
+
+    .gnd-profile-modal label {
+      display: block;
+      margin: 16px 0 8px;
+      color: #375573;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .gnd-profile-modal input {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      min-height: 46px;
+      padding: 12px 13px;
+      border: 1px solid #d6e3f5;
+      border-radius: 12px;
+      outline: none;
+      background: #f8faff;
+      color: #183451;
+      font-family: inherit;
+      font-size: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .gnd-profile-modal input:focus {
+      border-color: #2878d0;
+      box-shadow: 0 0 0 4px rgba(40, 120, 208, 0.11);
+    }
+
+    .gnd-profile-modal #profileMessage:not(:empty) {
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #eef5ff;
+      color: #245d9c;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .gnd-profile-modal .gnd-modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .gnd-profile-modal .gnd-modal-actions button {
+      min-height: 43px;
+      padding: 11px 16px;
+      border: 1px solid #dce7f5;
+      border-radius: 12px;
+      background: #f5f8fd;
+      color: #516b87;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .gnd-profile-modal .gnd-modal-actions button[type="submit"] {
+      border-color: #2878d0;
+      background: linear-gradient(135deg, #3285dd, #1455a0);
+      color: #ffffff;
+    }
+
+    .gnd-profile-modal .gnd-modal-actions button:hover {
+      filter: brightness(0.97);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 600px) {
+      body.gnd-profile-body > .gnd-profile-page {
+        padding: 20px 15px 110px;
+      }
+
+      .gnd-profile-page .gnd-profile-header h1 {
+        font-size: 24px;
+      }
+
+      .gnd-profile-page .gnd-profile-hero {
+        padding: 25px 17px 22px;
+        border-radius: 22px;
+      }
+
+      .gnd-profile-page .gnd-profile-info,
+      .gnd-profile-page .gnd-profile-menu {
+        padding: 18px;
+        border-radius: 19px;
+      }
+
+      body.gnd-profile-body .gnd-bottom-nav {
+        max-width: 100% !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gnd-profile-page * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="gnd-profile-body">
+
+  <main class="gnd-profile-page">
+
+    <!-- HEADER -->
+    <header class="gnd-profile-header">
+      <h1>Profil Saya</h1>
+      <p>Kelola informasi akunmu</p>
+    </header>
+
+    <!-- PROFIL PELANGGAN -->
+    <section class="gnd-profile-hero">
+      <div class="gnd-profile-avatar" id="profileAvatar">P</div>
+
+      <h2 id="profileName">Pelanggan Glow N Dry</h2>
+
+      <p id="profilePhone">Nomor WhatsApp belum tersedia</p>
+
+      <button
+        type="button"
+        class="gnd-profile-edit"
+        id="editProfileButton"
+      >
+        ✎ Edit Profil
+      </button>
+    </section>
+
+    <!-- INFORMASI AKUN -->
+    <section class="gnd-profile-info">
+      <h3>Informasi Akun</h3>
+
+      <div class="gnd-profile-info-row">
+        <span class="gnd-profile-info-icon">♙</span>
+
+        <div>
+          <small>Nama Lengkap</small>
+          <strong id="profileInfoName">-</strong>
+        </div>
+      </div>
+
+      <div class="gnd-profile-info-row">
+        <span class="gnd-profile-info-icon">☏</span>
+
+        <div>
+          <small>Nomor WhatsApp</small>
+          <strong id="profileInfoPhone">-</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="gnd-profile-menu">
+      <h3>Menu Lainnya</h3>
+
+      <a href="settings.html" class="gnd-profile-menu-item">
+        <span class="gnd-menu-icon">⚙</span>
+
+        <span class="gnd-menu-text">
+          <strong>Pengaturan</strong>
+          <small>Atur preferensi aplikasi</small>
+        </span>
+
+        <span class="gnd-menu-arrow">›</span>
+      </a>
+
+      <a href="store-info.html" class="gnd-profile-menu-item">
+        <span class="gnd-menu-icon">⌂</span>
+
+        <span class="gnd-menu-text">
+          <strong>Informasi Toko</strong>
+          <small>Alamat dan jam operasional</small>
+        </span>
+
+        <span class="gnd-menu-arrow">›</span>
+      </a>
+
+      <a href="history.html" class="gnd-profile-menu-item">
+        <span class="gnd-menu-icon">▤</span>
+
+        <span class="gnd-menu-text">
+          <strong>Riwayat Pesanan</strong>
+          <small>Lihat semua pesananmu</small>
+        </span>
+
+        <span class="gnd-menu-arrow">›</span>
+      </a>
+
+      <a href="price-list.html" class="gnd-profile-menu-item">
+        <span class="gnd-menu-icon">♧</span>
+
+        <span class="gnd-menu-text">
+          <strong>Daftar Harga</strong>
+          <small>Lihat layanan laundry</small>
+        </span>
+
+        <span class="gnd-menu-arrow">›</span>
+      </a>
+    </section>
+
+    <!-- LOGOUT -->
+    <button
+      type="button"
+      id="logoutButton"
+      class="gnd-profile-logout"
+    >
+      ↪ Keluar dari Akun
+    </button>
+
+    <!-- NAVIGASI BAWAH -->
+    <nav class="gnd-bottom-nav" aria-label="Navigasi utama">
+      <a href="home.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon">⌂</span>
+        <span>Beranda</span>
+      </a>
+
+      <a href="history.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon">▤</span>
+        <span>Riwayat</span>
+      </a>
+
+      <a
+        href="profile.html"
+        class="gnd-nav-item active"
+        aria-current="page"
+      >
+        <span class="gnd-nav-icon">♙</span>
+        <span>Profil</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <!-- MODAL EDIT PROFIL -->
+  <div class="gnd-modal-overlay" id="profileModal" hidden>
+    <section
+      class="gnd-profile-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="profileModalTitle"
+    >
+      <h2 id="profileModalTitle">Edit Profil</h2>
+
+      <form id="profileForm">
+        <label for="editProfileName">Nama Lengkap</label>
+
+        <input
+          id="editProfileName"
+          type="text"
+          placeholder="Masukkan nama lengkap"
+          required
+          minlength="2"
+          autocomplete="name"
+        >
+
+        <label for="editProfilePhone">Nomor WhatsApp</label>
+
+        <input
+          id="editProfilePhone"
+          type="tel"
+          placeholder="08xxxxxxxxxx"
+          required
+          autocomplete="tel"
+        >
+
+        <p id="profileMessage" role="status"></p>
+
+        <div class="gnd-modal-actions">
+          <button type="button" id="cancelProfileEdit">
+            Batal
+          </button>
+
+          <button type="submit">
+            Simpan
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script src="../js/profile.js"></script>
+  <script src="../js/theme.js"></script>
+</body>
+</html>

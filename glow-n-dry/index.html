@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glow N Dry - Laundry Service</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      background: linear-gradient(135deg, #eaf3ff, #f8fbff);
+      color: #203b66;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 30px;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(40, 100, 200, 0.12);
+      font-size: 48px;
+    }
+
+    .brand {
+      font-size: 32px;
+      font-weight: 800;
+      color: #2864c8;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #71819b;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .welcome-card {
+      background: #ffffff;
+      padding: 28px 24px;
+      border-radius: 24px;
+      box-shadow: 0 12px 35px rgba(40, 100, 200, 0.09);
+    }
+
+    .welcome-card h2 {
+      font-size: 23px;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      color: #71819b;
+      font-size: 14px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 15px 18px;
+      margin-bottom: 13px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .customer-button {
+      background: #2864c8;
+      color: #ffffff;
+      border: 1.5px solid #2864c8;
+      box-shadow: 0 6px 15px rgba(40, 100, 200, 0.18);
+    }
+
+    .customer-button:hover {
+      background: #1e50a5;
+    }
+
+    .admin-button {
+      background: #ffffff;
+      color: #2864c8;
+      border: 1.5px solid #2864c8;
+    }
+
+    .admin-button:hover {
+      background: #edf4ff;
+    }
+
+    .register-text {
+      margin-top: 13px;
+      font-size: 13px;
+      color: #71819b;
+    }
+
+    .register-text a {
+      color: #2864c8;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .footer {
+      margin-top: 24px;
+      color: #8492a9;
+      font-size: 12px;
+    }
+
+    @media (max-width: 360px) {
+      .brand {
+        font-size: 28px;
+      }
+
+      .welcome-card {
+        padding: 24px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+
+    <div class="logo">🧺</div>
+
+    <h1 class="brand">Glow N Dry</h1>
+
+    <p class="subtitle">
+      Laundry bersih, wangi, dan praktis.<br>
+      Serahkan cucianmu kepada kami!
+    </p>
+
+    <section class="welcome-card">
+      <h2>Selamat Datang!</h2>
+
+      <p class="description">
+        Silakan pilih jenis akun untuk melanjutkan
+        ke aplikasi Glow N Dry.
+      </p>
+
+      <a href="pages/login.html" class="button customer-button">
+        <span>👤</span>
+        Masuk sebagai Pelanggan
+      </a>
+
+      <a href="pages/admin-login.html" class="button admin-button">
+        <span>🛡️</span>
+        Masuk sebagai Admin
+      </a>
+
+      <p class="register-text">
+        Belum punya akun?
+        <a href="pages/register.html">Daftar sekarang</a>
+      </p>
+    </section>
+
+    <p class="footer">
+      © 2026 Glow N Dry · Laundry Service
+    </p>
+
+  </main>
+  <script src="js/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,709 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Informasi Toko - Glow N Dry</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+
+  <style>
+    :root {
+      --store-blue: #2878d0;
+      --store-blue-dark: #1455a0;
+      --store-blue-light: #eaf3ff;
+      --store-text: #183451;
+      --store-muted: #718198;
+      --store-border: #e0eafa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+
+    body.gnd-store-body {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      min-height: 100vh;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow-x: clip;
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(181, 211, 255, 0.4),
+          transparent 30%
+        ),
+        linear-gradient(180deg, #f1f6ff, #f8faff 60%, #edf4ff);
+      color: var(--store-text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HALAMAN UTAMA */
+
+    body.gnd-store-body > .gnd-store-page {
+      position: relative;
+      left: auto;
+      right: auto;
+      transform: none;
+      width: 100%;
+      max-width: 600px;
+      min-width: 0;
+      min-height: 100vh;
+      margin: 0 auto !important;
+      padding: 24px 20px 115px;
+      box-sizing: border-box;
+    }
+
+    /* HEADER */
+
+    .gnd-store-page .gnd-page-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 0 0 25px;
+    }
+
+    .gnd-store-page .gnd-page-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 44px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--store-border);
+      border-radius: 14px;
+      background: #ffffff;
+      color: var(--store-blue);
+      font-size: 28px;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(35, 82, 140, 0.06);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .gnd-store-page .gnd-page-back:hover {
+      background: var(--store-blue-light);
+      transform: translateX(-2px);
+    }
+
+    .gnd-store-page .gnd-page-header h1 {
+      margin: 0 0 5px;
+      color: #183e6b;
+      font-size: 25px;
+      font-weight: 850;
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+    }
+
+    .gnd-store-page .gnd-page-header p {
+      margin: 0;
+      color: var(--store-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* BANNER TOKO */
+
+    .gnd-store-page .gnd-store-banner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 30px 23px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 25px;
+      background: linear-gradient(
+        135deg,
+        #1455a0 0%,
+        #2878d0 57%,
+        #69adf5 100%
+      );
+      color: #ffffff;
+      text-align: center;
+      box-shadow: 0 14px 32px rgba(40, 120, 208, 0.2);
+    }
+
+    .gnd-store-page .gnd-store-banner::before {
+      content: "";
+      position: absolute;
+      top: -75px;
+      right: -35px;
+      width: 175px;
+      height: 175px;
+      border: 1px solid rgba(255, 255, 255, 0.17);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+
+    .gnd-store-page .gnd-store-banner::after {
+      content: "";
+      position: absolute;
+      bottom: -95px;
+      left: -35px;
+      width: 165px;
+      height: 165px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.07);
+      pointer-events: none;
+    }
+
+    .gnd-store-page .gnd-store-logo {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 82px;
+      height: 82px;
+      margin-bottom: 15px;
+      border: 2px solid rgba(255, 255, 255, 0.65);
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.17);
+      font-size: 43px;
+      box-shadow: 0 8px 20px rgba(9, 43, 91, 0.12);
+    }
+
+    .gnd-store-page .gnd-store-banner h2 {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 9px;
+      color: #ffffff;
+      font-size: 27px;
+      font-weight: 850;
+      letter-spacing: -0.6px;
+    }
+
+    .gnd-store-page .gnd-store-banner p {
+      position: relative;
+      z-index: 1;
+      max-width: 330px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .gnd-store-tag {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 11px;
+      margin-top: 17px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.13);
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+    }
+
+    /* KARTU INFORMASI */
+
+    .gnd-store-page .gnd-store-card {
+      width: 100%;
+      min-width: 0;
+      padding: 22px;
+      margin-bottom: 20px;
+      border: 1px solid var(--store-border);
+      border-radius: 21px;
+      background: #ffffff;
+      box-shadow: 0 9px 25px rgba(37, 87, 148, 0.06);
+    }
+
+    .gnd-store-page .gnd-store-card h2 {
+      margin: 0 0 19px;
+      color: #183e6b;
+      font-size: 17px;
+      font-weight: 850;
+      letter-spacing: -0.3px;
+    }
+
+    /* BARIS INFORMASI */
+
+    .gnd-store-page .gnd-store-info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      min-width: 0;
+      padding: 15px 0;
+      border-bottom: 1px solid #edf2fa;
+    }
+
+    .gnd-store-page .gnd-store-info-row:first-of-type {
+      padding-top: 2px;
+    }
+
+    .gnd-store-page .gnd-store-info-row:last-child {
+      padding-bottom: 2px;
+      border-bottom: none;
+    }
+
+    .gnd-store-page .gnd-store-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 44px;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #e6f1ff, #f2f7ff);
+      color: #2878d0;
+      font-size: 22px;
+    }
+
+    .gnd-store-page .gnd-store-info-row > div {
+      flex: 1;
+      min-width: 0;
+      padding-top: 2px;
+    }
+
+    .gnd-store-page .gnd-store-info-row strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #244565;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .gnd-store-page .gnd-store-info-row p {
+      margin: 0;
+      color: #718198;
+      font-size: 12px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    /* JAM OPERASIONAL */
+
+    .gnd-store-page .gnd-store-hours {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid #edf2fa;
+    }
+
+    .gnd-store-page .gnd-store-hours:first-of-type {
+      padding-top: 2px;
+    }
+
+    .gnd-store-page .gnd-store-hours > span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #647b97;
+      font-size: 12px;
+    }
+
+    .gnd-store-page .gnd-store-hours strong {
+      flex-shrink: 0;
+      color: #245d9c;
+      font-size: 12px;
+      font-weight: 800;
+      text-align: right;
+    }
+
+    .gnd-store-hours:last-of-type {
+      border-bottom: none !important;
+    }
+
+    .gnd-store-page .gnd-store-note {
+      padding: 13px 14px;
+      margin: 13px 0 0;
+      border: 1px solid #dce9fa;
+      border-radius: 12px;
+      background: #f3f8ff;
+      color: #647b97;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    /* BANTUAN */
+
+    .gnd-store-page .gnd-store-help-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 47px;
+      height: 47px;
+      margin-bottom: 13px;
+      border-radius: 15px;
+      background: #eaf3ff;
+      color: #2878d0;
+      font-size: 24px;
+    }
+
+    .gnd-store-page .gnd-store-help-text {
+      margin: -7px 0 17px;
+      color: #718198;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .gnd-store-page .gnd-store-contact {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 49px;
+      padding: 13px 17px;
+      border: 1px solid #2878d0;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #3285dd, #1455a0);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 850;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 7px 17px rgba(40, 120, 208, 0.19);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .gnd-store-page .gnd-store-contact:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 11px 22px rgba(40, 120, 208, 0.25);
+    }
+
+    .gnd-store-page .gnd-store-contact:focus-visible {
+      outline: 3px solid rgba(40, 120, 208, 0.25);
+      outline-offset: 3px;
+    }
+
+    /* NAVIGASI BAWAH */
+
+    body.gnd-store-body .gnd-bottom-nav {
+      position: fixed !important;
+      z-index: 100;
+      left: 50% !important;
+      right: auto !important;
+      bottom: 0 !important;
+      transform: translateX(-50%) !important;
+
+      display: flex;
+      align-items: stretch;
+      justify-content: space-around;
+      gap: 5px;
+
+      width: 100% !important;
+      max-width: 600px !important;
+      min-width: 0 !important;
+      min-height: 76px;
+
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      margin: 0 !important;
+
+      border: 1px solid #e0eafa;
+      border-bottom: none;
+      border-radius: 22px 22px 0 0;
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 -8px 28px rgba(37, 87, 148, 0.09);
+      backdrop-filter: blur(14px);
+    }
+
+    .gnd-store-page .gnd-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1 1 0;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 0;
+      padding: 5px 2px;
+      border-radius: 13px;
+      color: #8593a8;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .gnd-store-page .gnd-nav-icon {
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .gnd-store-page .gnd-nav-item.active {
+      color: #2878d0;
+    }
+
+    .gnd-store-page .gnd-nav-item:hover {
+      background: #f0f6ff;
+      color: #1455a0;
+    }
+
+    /* MODE GELAP */
+
+    body.gnd-dark-mode.gnd-store-body {
+      background: #0b1220 !important;
+      color: #e7eef9 !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-page-header h1,
+    body.gnd-dark-mode .gnd-store-page .gnd-store-card h2 {
+      color: #e7f0ff !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-page-header p {
+      color: #a8b8ce !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-page-back {
+      background: #151f31 !important;
+      color: #86bdff !important;
+      border-color: #2a3a52 !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-store-card {
+      background: #151f31 !important;
+      border-color: #2a3a52 !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-store-info-row strong {
+      color: #e7f0ff !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-store-info-row p,
+    body.gnd-dark-mode .gnd-store-page .gnd-store-help-text {
+      color: #a8b8ce !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-store-info-row,
+    body.gnd-dark-mode .gnd-store-page .gnd-store-hours {
+      border-color: #2a3a52 !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-store-icon {
+      background: #1b3150 !important;
+      color: #86bdff !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-store-hours > span {
+      color: #a8b8ce !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-store-hours strong {
+      color: #9bc9ff !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-store-note {
+      background: #101f34 !important;
+      border-color: #2a4464 !important;
+      color: #c4d9f5 !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-store-help-icon {
+      background: #1b3150 !important;
+      color: #86bdff !important;
+    }
+
+    body.gnd-dark-mode.gnd-store-body .gnd-bottom-nav {
+      background: rgba(13, 22, 37, 0.98) !important;
+      border-color: #2a3a52 !important;
+      box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.22) !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-nav-item {
+      color: #93a5bd !important;
+    }
+
+    body.gnd-dark-mode .gnd-store-page .gnd-nav-item.active {
+      color: #75b4ff !important;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 600px) {
+      body.gnd-store-body > .gnd-store-page {
+        padding: 20px 15px 110px;
+      }
+
+      .gnd-store-page .gnd-page-header h1 {
+        font-size: 23px;
+      }
+
+      .gnd-store-page .gnd-store-banner {
+        padding: 26px 18px;
+        border-radius: 22px;
+      }
+
+      .gnd-store-page .gnd-store-card {
+        padding: 18px;
+        border-radius: 19px;
+      }
+
+      body.gnd-store-body .gnd-bottom-nav {
+        max-width: 100% !important;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .gnd-store-page .gnd-store-hours {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      .gnd-store-page .gnd-store-hours strong {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gnd-store-page * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="gnd-store-body">
+
+  <main class="gnd-store-page">
+
+    <!-- HEADER -->
+    <header class="gnd-page-header">
+      <a href="profile.html" class="gnd-page-back" aria-label="Kembali">
+        ‹
+      </a>
+
+      <div>
+        <h1>Informasi Toko</h1>
+        <p>Kenali layanan Glow N Dry</p>
+      </div>
+    </header>
+
+    <!-- BANNER -->
+    <section class="gnd-store-banner">
+      <div class="gnd-store-logo" aria-hidden="true">🧺</div>
+
+      <h2>Glow N Dry</h2>
+
+      <p>
+        Solusi laundry praktis, bersih, dan nyaman untukmu.
+      </p>
+
+      <div class="gnd-store-tag">
+        ✦ BERSIH · WANGI · PRAKTIS
+      </div>
+    </section>
+
+    <!-- INFORMASI UMUM -->
+    <section class="gnd-store-card">
+      <h2>Informasi Umum</h2>
+
+      <div class="gnd-store-info-row">
+        <span class="gnd-store-icon" aria-hidden="true">⌂</span>
+        <div>
+          <strong>Alamat Toko</strong>
+          <p id="storeAddress">Alamat toko belum diatur.</p>
+        </div>
+      </div>
+
+      <div class="gnd-store-info-row">
+        <span class="gnd-store-icon" aria-hidden="true">☏</span>
+        <div>
+          <strong>Nomor WhatsApp</strong>
+          <p id="storePhone">Nomor kontak toko belum diatur.</p>
+        </div>
+      </div>
+
+      <div class="gnd-store-info-row">
+        <span class="gnd-store-icon" aria-hidden="true">✉</span>
+        <div>
+          <strong>Email</strong>
+          <p id="storeEmail">Email toko belum diatur.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- JAM OPERASIONAL -->
+    <section class="gnd-store-card">
+      <h2>Jam Operasional</h2>
+
+      <div class="gnd-store-hours">
+        <span>◷ Senin – Jumat</span>
+        <strong id="weekdayHours">08.00 – 20.00</strong>
+      </div>
+
+      <div class="gnd-store-hours">
+        <span>◷ Sabtu</span>
+        <strong id="saturdayHours">08.00 – 18.00</strong>
+      </div>
+
+      <div class="gnd-store-hours">
+        <span>◷ Minggu</span>
+        <strong id="sundayHours">09.00 – 15.00</strong>
+      </div>
+
+      <p class="gnd-store-note">
+        Informasi alamat, kontak, dan jam operasional merupakan
+        data contoh. Sesuaikan dengan informasi toko yang sebenarnya.
+      </p>
+    </section>
+
+    <!-- BANTUAN -->
+    <section class="gnd-store-card">
+      <div class="gnd-store-help-icon" aria-hidden="true">✉</div>
+
+      <h2>Butuh Bantuan?</h2>
+
+      <p class="gnd-store-help-text">
+        Hubungi tim Glow N Dry untuk pertanyaan tentang layanan
+        laundry dan pesananmu.
+      </p>
+
+      <a
+        href="#"
+        id="storeContactButton"
+        class="gnd-store-contact"
+      >
+        <span aria-hidden="true">☏</span>
+        <span>Hubungi Kami via WhatsApp</span>
+      </a>
+    </section>
+
+    <!-- NAVIGASI BAWAH -->
+    <nav class="gnd-bottom-nav" aria-label="Navigasi utama">
+      <a href="home.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon">⌂</span>
+        <span>Beranda</span>
+      </a>
+
+      <a href="history.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon">▤</span>
+        <span>Riwayat</span>
+      </a>
+
+      <a href="profile.html" class="gnd-nav-item active">
+        <span class="gnd-nav-icon">♙</span>
+        <span>Profil</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <script src="../js/store-info.js"></script>
+  <script src="../js/theme.js"></script>
+</body>
+</html>

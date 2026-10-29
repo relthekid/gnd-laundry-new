@@ -1,0 +1,1032 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2563eb">
+  <title>Dashboard Admin - Glow N Dry</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      color-scheme: light;
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --blue-light: #eff6ff;
+      --background: #f5f8ff;
+      --surface: #ffffff;
+      --surface-soft: #f8faff;
+      --text: #172b4d;
+      --muted: #71819b;
+      --border: #e2eaf5;
+      --green: #15803d;
+      --red: #dc2626;
+      --shadow: 0 5px 22px rgba(28, 65, 130, 0.055);
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.5;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid rgba(59, 130, 246, 0.4);
+      outline-offset: 3px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* HEADER */
+    .admin-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      min-height: 76px;
+      padding: 14px max(22px, calc((100% - 1250px) / 2));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 3px 14px rgba(28, 65, 130, 0.035);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-icon {
+      width: 47px;
+      height: 47px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #2563eb, #60a5fa);
+      box-shadow: 0 5px 13px rgba(37, 99, 235, 0.2);
+      font-size: 25px;
+    }
+
+    .brand h1 {
+      color: var(--blue);
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .brand p {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 11px;
+    }
+
+    .admin-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 13px;
+      border: 1px solid #dbeafe;
+      border-radius: 25px;
+      color: var(--blue);
+      background: var(--blue-light);
+      font-size: 12px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      min-height: 41px;
+      padding: 10px 15px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      font-size: 13px;
+      font-weight: 750;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      color: #ffffff;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      box-shadow: 0 5px 13px rgba(37, 99, 235, 0.17);
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      box-shadow: 0 7px 17px rgba(37, 99, 235, 0.23);
+    }
+
+    .btn-outline {
+      color: var(--blue);
+      background: var(--surface);
+      border-color: var(--border);
+    }
+
+    .btn-outline:hover {
+      background: var(--blue-light);
+      border-color: #bfdbfe;
+    }
+
+    .btn-danger {
+      color: var(--red);
+      background: #fff1f2;
+      border-color: #fecdd3;
+    }
+
+    .btn-danger:hover {
+      background: #ffe4e6;
+    }
+
+    /* MAIN */
+    main {
+      width: 100%;
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 30px 24px 48px;
+    }
+
+    .page-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-bottom: 25px;
+    }
+
+    .page-heading h2 {
+      margin-bottom: 7px;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+    }
+
+    .page-heading p {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* STATISTICS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
+      min-width: 0;
+      padding: 20px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 9px 24px rgba(28, 65, 130, 0.09);
+    }
+
+    .stat-icon {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      border-radius: 14px;
+      background: var(--blue-light);
+      font-size: 22px;
+    }
+
+    .stat-card:nth-child(2) .stat-icon {
+      background: #e0f2fe;
+    }
+
+    .stat-card:nth-child(3) .stat-icon {
+      background: #dcfce7;
+    }
+
+    .stat-card:nth-child(4) .stat-icon {
+      background: #fef3c7;
+    }
+
+    .stat-card:nth-child(5) .stat-icon {
+      background: #ede9fe;
+    }
+
+    .stat-card p {
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .stat-card h3 {
+      font-size: clamp(19px, 2vw, 25px);
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      overflow-wrap: anywhere;
+    }
+
+    /* PANELS */
+    .panel {
+      margin-bottom: 24px;
+      padding: 25px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 95px;
+    }
+
+    .panel-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 23px;
+    }
+
+    .panel-heading h3 {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    .panel-heading p {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* FORM */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .field input,
+    .field select,
+    .field textarea,
+    .toolbar input,
+    .toolbar select {
+      width: 100%;
+      min-width: 0;
+      min-height: 45px;
+      padding: 11px 13px;
+      color: var(--text);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      outline: none;
+      font-size: 13px;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder,
+    .toolbar input::placeholder {
+      color: #94a3b8;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus,
+    .toolbar input:focus,
+    .toolbar select:focus {
+      border-color: #60a5fa;
+      background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+    }
+
+    .field textarea {
+      min-height: 95px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 21px;
+    }
+
+    #adminManualOrderMessage,
+    #adminMessage {
+      margin-top: 12px;
+      font-size: 13px;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+
+    /* SEARCH AND FILTER */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 19px;
+    }
+
+    .toolbar input {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .toolbar select {
+      width: auto;
+      min-width: 190px;
+    }
+
+    /* ORDER TABLE */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      scrollbar-width: thin;
+    }
+
+    table {
+      width: 100%;
+      min-width: 780px;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    th, td {
+      padding: 15px 13px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: middle;
+      font-size: 13px;
+    }
+
+    th {
+      color: var(--muted);
+      background: var(--surface-soft);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.45px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    td {
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    tbody tr {
+      background: var(--surface);
+      transition: background 0.15s;
+    }
+
+    tbody tr:hover {
+      background: var(--surface-soft);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Inputs and buttons created by admin.js */
+    #adminOrderList select,
+    #adminOrderList input {
+      max-width: 180px;
+      min-height: 36px;
+      padding: 7px 9px;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    #adminOrderList button {
+      margin: 2px;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--blue);
+      background: var(--surface);
+      font-size: 12px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    #adminOrderList button:hover {
+      background: var(--blue-light);
+    }
+
+    #adminOrderList button[disabled] {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .empty-state {
+      padding: 35px 15px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    /* FOOTER */
+    .gnd-admin-footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px 25px;
+      padding: 23px 20px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .gnd-admin-footer a {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .gnd-admin-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* DARK MODE */
+    body.gnd-dark-mode {
+      color-scheme: dark;
+      --background: #0b1425;
+      --surface: #142137;
+      --surface-soft: #192a43;
+      --text: #e6efff;
+      --muted: #a1b2cc;
+      --border: #2a3c57;
+      --blue-light: #1b3153;
+      --shadow: 0 5px 22px rgba(0, 0, 0, 0.13);
+    }
+
+    .gnd-dark-mode .admin-header {
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.12);
+    }
+
+    .gnd-dark-mode .admin-label {
+      border-color: #304d75;
+    }
+
+    .gnd-dark-mode .btn-danger {
+      background: #401f2a;
+      border-color: #69303c;
+      color: #fda4af;
+    }
+
+    .gnd-dark-mode .btn-danger:hover {
+      background: #512431;
+    }
+
+    .gnd-dark-mode .stat-card:nth-child(2) .stat-icon {
+      background: #153954;
+    }
+
+    .gnd-dark-mode .stat-card:nth-child(3) .stat-icon {
+      background: #173b32;
+    }
+
+    .gnd-dark-mode .stat-card:nth-child(4) .stat-icon {
+      background: #473820;
+    }
+
+    .gnd-dark-mode .stat-card:nth-child(5) .stat-icon {
+      background: #34284e;
+    }
+
+    .gnd-dark-mode #adminOrderList select,
+    .gnd-dark-mode #adminOrderList input {
+      color: var(--text);
+      background: var(--surface-soft);
+      border-color: var(--border);
+    }
+
+    .gnd-dark-mode #adminOrderList button {
+      color: #bfdbfe;
+      background: var(--surface-soft);
+      border-color: var(--border);
+    }
+
+    .gnd-dark-mode #adminOrderList button:hover {
+      background: #243a5b;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1050px) {
+      .stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .admin-header {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .admin-header {
+        position: static;
+        padding: 14px 16px;
+        gap: 10px;
+      }
+
+      .brand {
+        gap: 9px;
+      }
+
+      .brand-icon {
+        width: 41px;
+        height: 41px;
+        border-radius: 12px;
+        font-size: 22px;
+      }
+
+      .brand h1 {
+        font-size: 18px;
+      }
+
+      .brand p {
+        font-size: 10px;
+      }
+
+      .header-right {
+        gap: 0;
+      }
+
+      .admin-label {
+        display: none;
+      }
+
+      .header-right .btn {
+        min-height: 37px;
+        padding: 8px 11px;
+        font-size: 12px;
+      }
+
+      main {
+        padding: 23px 14px 30px;
+      }
+
+      .page-heading {
+        align-items: flex-start;
+        margin-bottom: 21px;
+      }
+
+      .page-heading h2 {
+        font-size: 24px;
+      }
+
+      .page-heading p {
+        font-size: 13px;
+      }
+
+      .page-heading > .btn {
+        width: 100%;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 11px;
+        margin-bottom: 19px;
+      }
+
+      .stat-card {
+        padding: 16px 13px;
+        border-radius: 14px;
+      }
+
+      .stat-icon {
+        width: 38px;
+        height: 38px;
+        margin-bottom: 12px;
+        border-radius: 12px;
+        font-size: 20px;
+      }
+
+      .stat-card p {
+        font-size: 11px;
+      }
+
+      .stat-card h3 {
+        font-size: 20px;
+      }
+
+      .panel {
+        padding: 19px 14px;
+        margin-bottom: 18px;
+        border-radius: 16px;
+      }
+
+      .panel-heading {
+        margin-bottom: 19px;
+      }
+
+      .panel-heading h3 {
+        font-size: 17px;
+      }
+
+      .panel-heading p {
+        font-size: 12px;
+      }
+
+      .form-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 15px;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .form-actions {
+        flex-direction: column;
+      }
+
+      .form-actions .btn {
+        width: 100%;
+      }
+
+      .toolbar {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .toolbar input,
+      .toolbar select {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .table-wrap {
+        border-radius: 10px;
+      }
+
+      th, td {
+        padding: 12px 10px;
+      }
+
+      .gnd-admin-footer {
+        gap: 12px 18px;
+        padding: 20px 15px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="admin-header">
+    <div class="brand">
+      <div class="brand-icon" aria-hidden="true">🧺</div>
+      <div>
+        <h1>Glow N Dry</h1>
+        <p>Panel Administrasi Laundry</p>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <span class="admin-label">🛡️ Administrator</span>
+      <button
+        type="button"
+        class="btn btn-outline"
+        id="adminLogoutButton"
+      >
+        Keluar
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-heading">
+      <div>
+        <h2>Dashboard Admin</h2>
+        <p>
+          Selamat datang di panel administrasi Glow N Dry.
+          Pantau pesanan, perbarui status, dan kelola data pelanggan di sini.
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        onclick="document.getElementById('tambah-pesanan').scrollIntoView({behavior:'smooth'})"
+      >
+        + Tambahkan Pesanan
+      </button>
+    </section>
+
+    <!-- RINGKASAN STATISTIK -->
+    <section class="stats" aria-label="Ringkasan pesanan">
+      <article class="stat-card">
+        <div class="stat-icon" aria-hidden="true">📦</div>
+        <p>Total Pesanan</p>
+        <h3 id="adminTotalOrders">0</h3>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon" aria-hidden="true">🫧</div>
+        <p>Sedang Diproses</p>
+        <h3 id="adminProcessingOrders">0</h3>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon" aria-hidden="true">✅</div>
+        <p>Pesanan Selesai</p>
+        <h3 id="adminCompletedOrders">0</h3>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon" aria-hidden="true">💰</div>
+        <p>Total Pendapatan</p>
+        <h3 id="adminRevenue">Rp0</h3>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon" aria-hidden="true">⚖️</div>
+        <p>Total Berat Cucian</p>
+        <h3 id="adminTotalWeight">0 kg</h3>
+      </article>
+    </section>
+
+    <!-- FORM TAMBAH PESANAN MANUAL -->
+    <section class="panel" id="tambah-pesanan">
+      <div class="panel-heading">
+        <div>
+          <h3>➕ Tambahkan Pesanan Manual</h3>
+          <p>
+            Catat pesanan pelanggan yang diterima langsung oleh admin.
+          </p>
+        </div>
+      </div>
+
+      <form id="adminManualOrderForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="manualCustomerName">Nama Pelanggan *</label>
+            <input
+              type="text"
+              id="manualCustomerName"
+              placeholder="Masukkan nama pelanggan"
+              autocomplete="name"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label for="manualCustomerPhone">Nomor Telepon *</label>
+            <input
+              type="tel"
+              id="manualCustomerPhone"
+              placeholder="Contoh: 081234567890"
+              autocomplete="tel"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label for="manualService">Jenis Layanan *</label>
+            <select id="manualService" required>
+              <option value="">Pilih layanan</option>
+              <option value="Cuci Kering">Cuci Kering</option>
+              <option value="Cuci Setrika">Cuci Setrika</option>
+              <option value="Setrika">Setrika</option>
+              <option value="Express">Express</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="manualWeight">Berat Cucian (kg) *</label>
+            <input
+              type="number"
+              id="manualWeight"
+              min="0.1"
+              step="0.1"
+              placeholder="Contoh: 3.5"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label for="manualStatus">Status Pesanan *</label>
+            <select id="manualStatus" required>
+              <option value="Diterima">Diterima</option>
+              <option value="Dicuci">Dicuci</option>
+              <option value="Dikeringkan">Dikeringkan</option>
+              <option value="Disetrika">Disetrika</option>
+              <option value="Siap Diambil">Siap Diambil</option>
+              <option value="Selesai">Selesai</option>
+              <option value="Dibatalkan">Dibatalkan</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="manualOrderTotal">Total Harga (Rp) *</label>
+            <input
+              type="number"
+              id="manualOrderTotal"
+              min="0"
+              step="100"
+              placeholder="Contoh: 15000"
+              required
+            >
+          </div>
+
+          <div class="field full">
+            <label for="manualNotes">Catatan Pesanan</label>
+            <textarea
+              id="manualNotes"
+              placeholder="Contoh: pakaian putih dipisahkan"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">
+            + Simpan Pesanan
+          </button>
+
+          <button type="reset" class="btn btn-outline">
+            Reset Form
+          </button>
+        </div>
+
+        <p
+          id="adminManualOrderMessage"
+          role="status"
+          aria-live="polite"
+        ></p>
+      </form>
+    </section>
+
+    <!-- DAFTAR PESANAN -->
+    <section class="panel" id="daftar-pesanan">
+      <div class="panel-heading">
+        <div>
+          <h3>📋 Daftar Pesanan</h3>
+          <p>
+            Cari pesanan pelanggan dan pantau perkembangan statusnya.
+          </p>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <input
+          type="search"
+          id="adminSearch"
+          placeholder="Cari nama, nomor telepon, atau ID pesanan..."
+          aria-label="Cari pesanan"
+        >
+
+        <select
+          id="adminFilter"
+          aria-label="Filter status pesanan"
+        >
+          <option value="">Semua Status</option>
+          <option value="Diterima">Diterima</option>
+          <option value="Dicuci">Dicuci</option>
+          <option value="Dikeringkan">Dikeringkan</option>
+          <option value="Disetrika">Disetrika</option>
+          <option value="Siap Diambil">Siap Diambil</option>
+          <option value="Selesai">Selesai</option>
+          <option value="Dibatalkan">Dibatalkan</option>
+        </select>
+      </div>
+
+      <p
+        id="adminMessage"
+        role="status"
+        aria-live="polite"
+      ></p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Pesanan</th>
+              <th>Pelanggan</th>
+              <th>Layanan</th>
+              <th>Berat</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+
+          <tbody id="adminOrderList"></tbody>
+        </table>
+      </div>
+
+      <div class="empty-state" id="adminEmpty" hidden>
+        <div style="font-size: 34px; margin-bottom: 10px;" aria-hidden="true">
+          📭
+        </div>
+        <strong>Belum ada pesanan yang ditampilkan.</strong>
+        <p>Pesanan akan muncul di sini setelah tersedia.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="gnd-admin-footer">
+    <a href="admin.html">Beranda Admin</a>
+    <a href="admin.html#daftar-pesanan">Daftar Pesanan</a>
+  </footer>
+
+  <!-- PERIKSA LOGIN ADMIN -->
+  <script>
+    if (sessionStorage.getItem("glowNDryAdminLoggedIn") !== "true") {
+      window.location.replace("admin-login.html");
+    } else {
+      const adminScript = document.createElement("script");
+      adminScript.src = "../js/admin.js";
+      document.body.appendChild(adminScript);
+    }
+  </script>
+
+  <script src="../js/theme.js"></script>
+</body>
+</html>

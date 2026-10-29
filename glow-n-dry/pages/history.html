@@ -1,0 +1,916 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Riwayat Pesanan - Glow N Dry</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+
+  <style>
+    :root {
+      --history-blue: #2878d0;
+      --history-blue-dark: #1455a0;
+      --history-blue-light: #eaf3ff;
+      --history-text: #183451;
+      --history-muted: #718198;
+      --history-border: #e0eafa;
+      --history-white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+
+    body.gnd-history-body {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      min-height: 100vh;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow-x: clip;
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(182, 212, 255, 0.38),
+          transparent 30%
+        ),
+        linear-gradient(180deg, #f1f6ff, #f8faff 60%, #edf4ff);
+      color: var(--history-text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HALAMAN UTAMA */
+
+    body.gnd-history-body > .gnd-history-page {
+      position: relative;
+      left: auto;
+      right: auto;
+      transform: none;
+
+      width: 100%;
+      max-width: 600px;
+      min-width: 0;
+      min-height: 100vh;
+
+      margin: 0 auto !important;
+      padding: 24px 20px 115px;
+
+      box-sizing: border-box;
+    }
+
+    /* HEADER */
+
+    .gnd-history-page .gnd-page-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 0 0 27px;
+    }
+
+    .gnd-history-page .gnd-page-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 44px;
+      width: 44px;
+      height: 44px;
+
+      border: 1px solid var(--history-border);
+      border-radius: 14px;
+
+      background: #ffffff;
+      color: var(--history-blue);
+
+      font-size: 28px;
+      text-decoration: none;
+
+      box-shadow: 0 5px 15px rgba(35, 82, 140, 0.06);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .gnd-history-page .gnd-page-back:hover {
+      background: var(--history-blue-light);
+      transform: translateX(-2px);
+    }
+
+    .gnd-history-page .gnd-page-header h1 {
+      margin: 0 0 5px;
+      color: #183e6b;
+      font-size: 25px;
+      font-weight: 850;
+      letter-spacing: -0.6px;
+      line-height: 1.3;
+    }
+
+    .gnd-history-page .gnd-page-header p {
+      margin: 0;
+      color: var(--history-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* AREA KONTEN */
+
+    .gnd-history-content {
+      width: 100%;
+      min-width: 0;
+    }
+
+    /* FILTER */
+
+    .gnd-history-filters {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 6px;
+
+      border: 1px solid #e1eafa;
+      border-radius: 15px;
+      background: #ffffff;
+
+      box-shadow: 0 5px 18px rgba(35, 82, 140, 0.05);
+    }
+
+    .gnd-history-page .gnd-history-filter {
+      flex: 1 1 0;
+      min-width: 0;
+      min-height: 42px;
+      padding: 10px 8px;
+
+      border: 1px solid transparent;
+      border-radius: 11px;
+      background: transparent;
+
+      color: #718198;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 750;
+
+      cursor: pointer;
+      transition:
+        background 0.2s,
+        color 0.2s,
+        box-shadow 0.2s;
+    }
+
+    .gnd-history-page .gnd-history-filter:hover {
+      background: #f2f7ff;
+      color: var(--history-blue);
+    }
+
+    .gnd-history-page .gnd-history-filter.active {
+      border-color: transparent;
+      background: linear-gradient(
+        135deg,
+        #3285dd,
+        #1455a0
+      );
+      color: #ffffff;
+      box-shadow: 0 4px 10px rgba(40, 120, 208, 0.2);
+    }
+
+    /* RINGKASAN JUMLAH PESANAN */
+
+    .gnd-history-summary {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+
+      width: 100%;
+      min-height: 112px;
+      padding: 23px;
+
+      margin-bottom: 23px;
+      overflow: hidden;
+
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 22px;
+      background: linear-gradient(
+        130deg,
+        #1455a0 0%,
+        #2878d0 62%,
+        #5ca4f3 100%
+      );
+
+      color: #ffffff;
+      box-shadow: 0 12px 28px rgba(40, 120, 208, 0.18);
+    }
+
+    .gnd-history-summary::after {
+      content: "";
+      position: absolute;
+      top: -38px;
+      right: 23px;
+
+      width: 115px;
+      height: 115px;
+
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+
+    .gnd-history-summary > div:first-child {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .gnd-history-summary .gnd-summary-label {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .gnd-history-summary strong {
+      color: #ffffff;
+      font-size: 36px;
+      font-weight: 850;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .gnd-summary-icon {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 55px;
+
+      width: 55px;
+      height: 55px;
+
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 17px;
+      background: rgba(255, 255, 255, 0.16);
+
+      color: #ffffff;
+      font-size: 28px;
+    }
+
+    /* DAFTAR PESANAN */
+
+    .gnd-history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    /* Gaya umum untuk kartu yang dibuat oleh history.js */
+    .gnd-history-list > * {
+      box-sizing: border-box;
+      min-width: 0;
+      max-width: 100%;
+
+      padding: 19px;
+      border: 1px solid var(--history-border);
+      border-radius: 19px;
+
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(37, 87, 148, 0.06);
+
+      overflow-wrap: anywhere;
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        transform 0.2s;
+    }
+
+    .gnd-history-list > *:hover {
+      border-color: #c5dcfa;
+      box-shadow: 0 11px 27px rgba(37, 87, 148, 0.09);
+    }
+
+    .gnd-history-list h2,
+    .gnd-history-list h3,
+    .gnd-history-list h4 {
+      color: #183e6b;
+      font-size: 15px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-history-list p {
+      color: #718198;
+      font-size: 12px;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-history-list small {
+      color: #718198;
+      line-height: 1.6;
+    }
+
+    .gnd-history-list button {
+      max-width: 100%;
+      min-height: 39px;
+      padding: 10px 14px;
+
+      border: 1px solid #d7e7fb;
+      border-radius: 11px;
+      background: #edf5ff;
+      color: #2168b8;
+
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .gnd-history-list a {
+      color: #2168b8;
+      overflow-wrap: anywhere;
+    }
+
+    /* STATUS PESANAN */
+    .gnd-history-list [class*="status"],
+    .gnd-history-list [class*="badge"] {
+      overflow-wrap: anywhere;
+    }
+
+    /* KEADAAN KOSONG */
+
+    .gnd-history-empty {
+      width: 100%;
+      padding: 37px 22px;
+      margin-top: 6px;
+
+      border: 1px dashed #cdddf2;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.86);
+
+      text-align: center;
+    }
+
+    .gnd-empty-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 18px;
+
+      border: 1px solid #d9e8fb;
+      border-radius: 24px;
+      background: linear-gradient(145deg, #e5f0ff, #f4f8ff);
+
+      font-size: 37px;
+    }
+
+    .gnd-history-empty h2 {
+      margin: 0 0 9px;
+      color: #183e6b;
+      font-size: 19px;
+      font-weight: 850;
+    }
+
+    .gnd-history-empty p {
+      max-width: 300px;
+      margin: 0 auto 22px;
+      color: #718198;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .gnd-history-page .gnd-empty-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 45px;
+      padding: 12px 19px;
+
+      border-radius: 13px;
+      background: linear-gradient(135deg, #3285dd, #1455a0);
+
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+
+      box-shadow: 0 7px 16px rgba(40, 120, 208, 0.18);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .gnd-history-page .gnd-empty-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(40, 120, 208, 0.25);
+    }
+
+    /* NAVIGASI BAWAH */
+
+    body.gnd-history-body .gnd-bottom-nav {
+      position: fixed !important;
+      z-index: 100;
+
+      left: 50% !important;
+      right: auto !important;
+      bottom: 0 !important;
+
+      transform: translateX(-50%) !important;
+
+      display: flex;
+      align-items: stretch;
+      justify-content: space-around;
+      gap: 5px;
+
+      width: 100% !important;
+      max-width: 600px !important;
+      min-width: 0 !important;
+
+      min-height: 76px;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+
+      margin: 0 !important;
+
+      border: 1px solid #e0eafa;
+      border-bottom: none;
+      border-radius: 22px 22px 0 0;
+
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 -8px 28px rgba(37, 87, 148, 0.09);
+      backdrop-filter: blur(14px);
+    }
+
+    .gnd-history-page .gnd-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1 1 0;
+      flex-direction: column;
+      gap: 5px;
+
+      min-width: 0;
+      padding: 5px 2px;
+
+      border-radius: 13px;
+      color: #8593a8;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .gnd-history-page .gnd-nav-icon {
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .gnd-history-page .gnd-nav-item.active {
+      color: #2878d0;
+    }
+
+    .gnd-history-page .gnd-nav-item:hover {
+      background: #f0f6ff;
+      color: #1455a0;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 600px) {
+      body.gnd-history-body > .gnd-history-page {
+        padding: 19px 15px 110px;
+      }
+
+      .gnd-history-page .gnd-page-header h1 {
+        font-size: 23px;
+      }
+
+      .gnd-history-summary {
+        min-height: 100px;
+        padding: 20px;
+        border-radius: 19px;
+      }
+
+      .gnd-history-summary strong {
+        font-size: 33px;
+      }
+
+      .gnd-history-list > * {
+        padding: 15px;
+      }
+
+      .gnd-history-empty {
+        padding: 30px 16px;
+      }
+
+      body.gnd-history-body .gnd-bottom-nav {
+        max-width: 100% !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gnd-history-page * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+
+    
+/* KARTU RIWAYAT PESANAN */
+
+.gnd-history-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gnd-history-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #edf2fa;
+}
+
+.gnd-history-id-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.gnd-history-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: #eaf3ff;
+  color: #2878d0;
+  font-size: 21px;
+}
+
+.gnd-history-id-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.gnd-history-overline {
+  color: #8a9ab0;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+}
+
+.gnd-history-order-id {
+  color: #183e6b;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.gnd-history-status {
+  display: inline-flex;
+  justify-content: center;
+  max-width: 125px;
+  flex-shrink: 0;
+  padding: 7px 9px;
+  border: 1px solid #d7e7fc;
+  border-radius: 999px;
+  background: #edf5ff;
+  color: #2168b8;
+  font-size: 10px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.gnd-history-status.status-received,
+.gnd-history-status.status-washing,
+.gnd-history-status.status-drying,
+.gnd-history-status.status-ironing {
+  background: #edf5ff;
+  color: #2168b8;
+  border-color: #d7e7fc;
+}
+
+.gnd-history-status.status-ready {
+  background: #e7f0ff;
+  color: #124d94;
+  border-color: #bdd8fa;
+}
+
+.gnd-history-status.status-completed {
+  background: #e8f2ff;
+  color: #1455a0;
+  border-color: #c7dcfb;
+}
+
+.gnd-history-status.status-cancelled {
+  background: #fff0f0;
+  color: #b33b46;
+  border-color: #f4d1d5;
+}
+
+.gnd-history-service-row,
+.gnd-history-date-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gnd-history-meta-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: #f0f6ff;
+  color: #2878d0;
+  font-size: 15px;
+}
+
+.gnd-history-service,
+.gnd-history-date {
+  margin: 0 !important;
+  color: #687e99 !important;
+  font-size: 12px !important;
+  line-height: 1.6 !important;
+}
+
+.gnd-history-total-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #dce9fa;
+  border-radius: 13px;
+  background: linear-gradient(120deg, #edf5ff, #f9fbff);
+}
+
+.gnd-history-total-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gnd-history-total-info small {
+  color: #718198;
+  font-size: 11px;
+}
+
+.gnd-history-total {
+  color: #1455a0;
+  font-size: 19px;
+  font-weight: 850;
+}
+
+.gnd-history-payment {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 0;
+}
+
+.gnd-history-payment-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 35px;
+  width: 35px;
+  height: 35px;
+  border-radius: 11px;
+  background: #f0f6ff;
+  color: #2878d0;
+  font-size: 17px;
+}
+
+.gnd-history-payment-info {
+  display: flex;
+  flex: 1 1 90px;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.gnd-history-payment-info small {
+  color: #8291a5;
+  font-size: 10px;
+}
+
+.gnd-history-payment-info strong {
+  color: #345472;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.gnd-history-payment-status {
+  display: inline-block;
+  max-width: 100%;
+  padding: 6px 9px;
+  border: 1px solid #f2dfad;
+  border-radius: 9px;
+  background: #fff8e8;
+  color: #8a6420;
+  font-size: 10px;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.gnd-history-payment-status.payment-paid {
+  border-color: #bfdafa;
+  background: #eaf3ff;
+  color: #1455a0;
+}
+
+.gnd-history-detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 45px;
+  padding: 12px 14px;
+  border: 1px solid #d6e6fb;
+  border-radius: 12px;
+  background: #edf5ff;
+  color: #2168b8 !important;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.gnd-history-detail:hover {
+  background: #dfedff;
+  transform: translateY(-1px);
+}
+
+.gnd-history-detail-arrow {
+  font-size: 21px;
+  line-height: 1;
+}
+
+@media (max-width: 380px) {
+  .gnd-history-card-top {
+    flex-wrap: wrap;
+  }
+
+  .gnd-history-status {
+    margin-left: 52px;
+  }
+
+  .gnd-history-total {
+    font-size: 17px;
+  }
+
+  .gnd-history-payment {
+    gap: 8px;
+  }
+}
+
+  </style>
+</head>
+
+<body class="gnd-history-body">
+
+  <main class="gnd-history-page">
+
+    <!-- HEADER -->
+    <header class="gnd-page-header">
+      <a href="home.html" class="gnd-page-back" aria-label="Kembali">
+        ‹
+      </a>
+
+      <div>
+        <h1>Riwayat Pesanan</h1>
+        <p>Lihat perjalanan cucianmu</p>
+      </div>
+    </header>
+
+    <section class="gnd-history-content">
+
+      <!-- FILTER PESANAN -->
+      <div
+        class="gnd-history-filters"
+        role="group"
+        aria-label="Filter pesanan"
+      >
+        <button
+          type="button"
+          class="gnd-history-filter active"
+          data-filter="Semua"
+          aria-pressed="true"
+        >
+          Semua
+        </button>
+
+        <button
+          type="button"
+          class="gnd-history-filter"
+          data-filter="Diproses"
+          aria-pressed="false"
+        >
+          Diproses
+        </button>
+
+        <button
+          type="button"
+          class="gnd-history-filter"
+          data-filter="Selesai"
+          aria-pressed="false"
+        >
+          Selesai
+        </button>
+      </div>
+
+      <!-- RINGKASAN -->
+      <div class="gnd-history-summary">
+        <div>
+          <span class="gnd-summary-label">Total pesanan kamu</span>
+          <strong id="historyTotal">0</strong>
+        </div>
+
+        <div class="gnd-summary-icon" aria-hidden="true">
+          ▤
+        </div>
+      </div>
+
+      <!-- DAFTAR PESANAN DARI JAVASCRIPT -->
+      <div
+        id="historyOrderList"
+        class="gnd-history-list"
+        aria-live="polite"
+      ></div>
+
+      <!-- TAMPILAN JIKA BELUM ADA PESANAN -->
+      <div id="historyEmpty" class="gnd-history-empty">
+        <div class="gnd-empty-icon" aria-hidden="true">🧺</div>
+
+        <h2>Belum Ada Pesanan</h2>
+
+        <p>
+          Pesanan laundry kamu akan muncul di sini.
+          Yuk, pilih layanan yang sesuai kebutuhanmu!
+        </p>
+
+        <a href="price-list.html" class="gnd-empty-button">
+          Lihat Daftar Harga
+        </a>
+      </div>
+
+    </section>
+
+    <!-- NAVIGASI BAWAH -->
+    <nav class="gnd-bottom-nav" aria-label="Navigasi utama">
+
+      <a href="home.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon">⌂</span>
+        <span>Beranda</span>
+      </a>
+
+      <a
+        href="history.html"
+        class="gnd-nav-item active"
+        aria-current="page"
+      >
+        <span class="gnd-nav-icon">▤</span>
+        <span>Riwayat</span>
+      </a>
+
+      <a href="profile.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon">♙</span>
+        <span>Profil</span>
+      </a>
+
+    </nav>
+
+  </main>
+
+  <script src="../js/history.js"></script>
+  <script src="../js/theme.js"></script>
+</body>
+</html>

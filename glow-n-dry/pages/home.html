@@ -1,0 +1,1159 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Glow N Dry - Beranda</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+
+  <style>
+    
+    :root {
+      --home-blue: #2878d0;
+      --home-blue-dark: #1455a0;
+      --home-blue-light: #eaf3ff;
+      --home-text: #183451;
+      --home-muted: #718198;
+      --home-border: #e1eaf6;
+      --home-white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body.gnd-home-body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 90% 2%,
+          rgba(176, 211, 255, 0.4),
+          transparent 30%
+        ),
+        linear-gradient(180deg, #f2f7ff 0%, #f8faff 60%, #edf4ff 100%);
+      color: var(--home-text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .gnd-home {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      min-height: 100vh;
+      padding: 22px 20px 115px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+
+    .gnd-home .gnd-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .gnd-home .gnd-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--home-text);
+      font-size: 20px;
+      font-weight: 850;
+      letter-spacing: -0.6px;
+      text-decoration: none;
+    }
+
+    .gnd-hanger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 43px;
+      height: 43px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #3f91ee, #1455a0);
+      box-shadow: 0 7px 16px rgba(40, 120, 208, 0.22);
+      color: #ffffff;
+      font-size: 28px;
+    }
+
+    .gnd-home .gnd-notification {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 43px;
+      height: 43px;
+      border: 1px solid var(--home-border);
+      border-radius: 14px;
+      background: #ffffff;
+      color: var(--home-blue-dark);
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(35, 82, 140, 0.06);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .gnd-home .gnd-notification:hover {
+      transform: translateY(-2px);
+      background: var(--home-blue-light);
+    }
+
+    .gnd-notification-dot {
+      position: absolute;
+      top: 9px;
+      right: 9px;
+      width: 8px;
+      height: 8px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      background: #f59e0b;
+    }
+
+    /* WELCOME BANNER */
+
+    .gnd-home .gnd-welcome {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      overflow: hidden;
+      min-height: 220px;
+      padding: 25px 23px;
+      margin-bottom: 23px;
+      border-radius: 25px;
+      background: linear-gradient(
+        130deg,
+        #1455a0 0%,
+        #2878d0 55%,
+        #68aff8 100%
+      );
+      color: #ffffff;
+      box-shadow: 0 15px 35px rgba(30, 103, 187, 0.2);
+    }
+
+    .gnd-welcome::before {
+      content: "";
+      position: absolute;
+      top: -65px;
+      right: -35px;
+      width: 190px;
+      height: 190px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .gnd-welcome::after {
+      content: "";
+      position: absolute;
+      right: 35px;
+      bottom: -105px;
+      width: 155px;
+      height: 155px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .gnd-welcome-copy {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .gnd-welcome-copy h1 {
+      margin: 0 0 11px;
+      color: #ffffff;
+      font-size: clamp(23px, 5vw, 29px);
+      font-weight: 850;
+      line-height: 1.3;
+      letter-spacing: -0.7px;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-welcome-copy h1 span {
+      color: #dcecff;
+    }
+
+    .gnd-welcome-copy p {
+      max-width: 245px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .gnd-welcome-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 13px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: 0.7px;
+    }
+
+    /* ILUSTRASI MESIN CUCI */
+
+    .gnd-laundry-art {
+      position: relative;
+      z-index: 1;
+      width: 118px;
+      min-width: 118px;
+      height: 145px;
+    }
+
+    .gnd-art-bubble {
+      position: absolute;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+    }
+
+    .bubble-one {
+      top: 12px;
+      right: 4px;
+      width: 14px;
+      height: 14px;
+    }
+
+    .bubble-two {
+      top: 43px;
+      left: 0;
+      width: 9px;
+      height: 9px;
+    }
+
+    .gnd-art-machine {
+      position: absolute;
+      right: 9px;
+      bottom: 12px;
+      width: 89px;
+      height: 113px;
+      padding: 8px;
+      border: 2px solid rgba(255, 255, 255, 0.75);
+      border-radius: 14px;
+      background: linear-gradient(145deg, #ffffff, #d9eaff);
+      box-shadow: 0 9px 20px rgba(9, 43, 91, 0.18);
+      transform: rotate(3deg);
+    }
+
+    .gnd-art-panel {
+      height: 10px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      background: #a9c9ef;
+    }
+
+    .gnd-art-door {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 64px;
+      border: 4px solid #7aabe6;
+      border-radius: 50%;
+      background: #c3e5ff;
+    }
+
+    .gnd-art-door div {
+      width: 37px;
+      height: 37px;
+      border: 4px solid #438bd7;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #b8e5ff, #4ca6e8);
+    }
+
+    .gnd-art-basket {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 15px;
+      background: #ffffff;
+      box-shadow: 0 7px 18px rgba(9, 43, 91, 0.16);
+      font-size: 25px;
+      transform: rotate(-8deg);
+    }
+
+    /* TOMBOL AKSI CEPAT */
+
+    .gnd-home .gnd-quick-actions {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 12px;
+      margin: 0 0 25px;
+    }
+
+    .gnd-home .gnd-quick-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 53px;
+      padding: 13px 12px;
+      border: 1px solid var(--home-border);
+      border-radius: 15px;
+      background: #ffffff;
+      color: #2468ae;
+      font-size: 12px;
+      font-weight: 800;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 6px 17px rgba(35, 82, 140, 0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .gnd-home .gnd-quick-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(35, 82, 140, 0.1);
+    }
+
+    .gnd-home .gnd-quick-button.primary {
+      border-color: transparent;
+      background: linear-gradient(135deg, #3285dd, #1455a0);
+      color: #ffffff;
+      box-shadow: 0 8px 17px rgba(40, 120, 208, 0.2);
+    }
+
+    .gnd-quick-icon {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    /* JUDUL BAGIAN */
+
+    .gnd-home .gnd-section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 0 0 14px;
+    }
+
+    .gnd-home .gnd-section-heading h2 {
+      margin: 0;
+      color: #183e6b;
+      font-size: 18px;
+      font-weight: 850;
+      letter-spacing: -0.4px;
+    }
+
+    .gnd-home .gnd-section-caption {
+      margin: 5px 0 0;
+      color: var(--home-muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* KARTU CUCIAN AKTIF */
+
+    .gnd-home .gnd-active-order {
+      padding: 21px;
+      margin-bottom: 27px;
+      border: 1px solid var(--home-border);
+      border-radius: 22px;
+      background: #ffffff;
+      box-shadow: 0 11px 28px rgba(37, 87, 148, 0.07);
+    }
+
+    .gnd-home .gnd-order-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .gnd-home .gnd-order-title {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .gnd-mini-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 43px;
+      height: 43px;
+      flex-shrink: 0;
+      border-radius: 13px;
+      background: #eaf3ff;
+      color: #2878d0;
+      font-size: 21px;
+    }
+
+    .gnd-home .gnd-order-title h2 {
+      margin: 0 0 6px;
+      color: #183e6b;
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .gnd-home .gnd-order-title p {
+      margin: 0;
+      color: #8090a5;
+      font-size: 11px;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-home .gnd-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 120px;
+      padding: 7px 10px;
+      border: 1px solid #d5e7fc;
+      border-radius: 999px;
+      background: #edf5ff;
+      color: #1f65ad;
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.4;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    /* PROGRES CUCIAN */
+
+    .gnd-home .gnd-progress {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      gap: 2px;
+      margin: 0 0 23px;
+    }
+
+    .gnd-home .gnd-progress-line {
+      position: absolute;
+      top: 15px;
+      right: 9%;
+      left: 9%;
+      height: 3px;
+      border-radius: 5px;
+      background: #e3edf9;
+    }
+
+    .gnd-home .gnd-progress-step {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex: 1;
+      align-items: center;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+      text-align: center;
+    }
+
+    .gnd-home .gnd-progress-step span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border: 3px solid #e3edf9;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #94a5ba;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .gnd-home .gnd-progress-step.completed span {
+      border-color: #2878d0;
+      background: #2878d0;
+      color: #ffffff;
+      box-shadow: 0 3px 9px rgba(40, 120, 208, 0.18);
+    }
+
+    .gnd-home .gnd-progress-step small {
+      max-width: 72px;
+      color: #7e8ca1;
+      font-size: 9px;
+      font-weight: 650;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-home .gnd-progress-step.completed small {
+      color: #2168b8;
+    }
+
+    /* INFORMASI STATUS */
+
+    .gnd-home .gnd-estimate {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 13px;
+      margin: 0 0 16px;
+      border: 1px solid #e0ebf9;
+      border-radius: 13px;
+      background: #f5f9ff;
+      color: #607794;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .gnd-home .gnd-estimate > span:first-child {
+      color: #2878d0;
+      font-size: 17px;
+    }
+
+    /* TOMBOL DETAIL */
+
+    .gnd-home .gnd-detail-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 46px;
+      padding: 12px 15px;
+      border: 1px solid #dbe9fb;
+      border-radius: 13px;
+      background: #edf5ff;
+      color: #1d65b2;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .gnd-home .gnd-detail-button:hover {
+      background: #dfeeff;
+      transform: translateY(-1px);
+    }
+
+    .gnd-home .gnd-detail-button span {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    /* LAYANAN */
+
+    .gnd-home .gnd-services {
+      margin-bottom: 25px;
+    }
+
+    .gnd-home .gnd-service-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .gnd-home .gnd-service-tile {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 157px;
+      padding: 17px;
+      border: 1px solid var(--home-border);
+      border-radius: 19px;
+      background: #ffffff;
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(37, 87, 148, 0.055);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .gnd-home .gnd-service-tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(37, 87, 148, 0.1);
+    }
+
+    .gnd-home .gnd-tile-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      margin-bottom: 15px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #e4f0ff, #f0f6ff);
+      color: #2878d0;
+      font-size: 24px;
+    }
+
+    .gnd-home .gnd-tile-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-right: 8px;
+    }
+
+    .gnd-home .gnd-tile-copy strong {
+      color: #183e6b;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .gnd-home .gnd-tile-copy small {
+      color: #7a899e;
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    .gnd-home .gnd-tile-arrow {
+      position: absolute;
+      top: 19px;
+      right: 16px;
+      color: #79a8df;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    /* INFO KECIL TAMBAHAN */
+
+    .gnd-home .gnd-trust-note {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid #dce9f9;
+      border-radius: 16px;
+      background: linear-gradient(120deg, #eaf3ff, #ffffff);
+    }
+
+    .gnd-home .gnd-trust-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 39px;
+      height: 39px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      background: #2878d0;
+      color: white;
+      font-size: 19px;
+    }
+
+    .gnd-home .gnd-trust-note strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #1b4f87;
+      font-size: 12px;
+    }
+
+    .gnd-home .gnd-trust-note small {
+      display: block;
+      color: #718198;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    /* NAVIGASI BAWAH */
+
+    .gnd-home .gnd-bottom-nav {
+      position: fixed;
+      z-index: 100;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      max-width: 600px;
+      min-height: 76px;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      margin: 0 auto;
+      border: 1px solid #e0eafa;
+      border-bottom: none;
+      border-radius: 22px 22px 0 0;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 -8px 28px rgba(37, 87, 148, 0.09);
+      backdrop-filter: blur(14px);
+    }
+
+    .gnd-home .gnd-nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      flex-direction: column;
+      gap: 5px;
+      border-radius: 13px;
+      color: #8593a8;
+      text-decoration: none;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .gnd-home .gnd-nav-link span {
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .gnd-home .gnd-nav-link small {
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .gnd-home .gnd-nav-link.selected {
+      color: #2878d0;
+    }
+
+    .gnd-home .gnd-nav-link.selected span {
+      text-shadow: 0 3px 10px rgba(40, 120, 208, 0.16);
+    }
+
+    .gnd-home .gnd-nav-link:hover {
+      background: #f0f6ff;
+      color: #1455a0;
+    }
+
+    /* ANIMASI */
+
+    @keyframes gndHomeRise {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .gnd-home .gnd-welcome {
+      animation: gndHomeRise 0.4s ease both;
+    }
+
+    .gnd-home .gnd-active-order {
+      animation: gndHomeRise 0.5s ease both;
+    }
+
+    .gnd-home .gnd-service-tile {
+      animation: gndHomeRise 0.5s ease both;
+    }
+
+    .gnd-home .gnd-service-tile:nth-child(2) {
+      animation-delay: 0.08s;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 420px) {
+      .gnd-home {
+        padding: 17px 15px 110px;
+      }
+
+      .gnd-home .gnd-welcome {
+        min-height: 205px;
+        padding: 21px 17px;
+        border-radius: 21px;
+      }
+
+      .gnd-laundry-art {
+        width: 92px;
+        min-width: 92px;
+        transform: scale(0.9);
+        transform-origin: right center;
+      }
+
+      .gnd-welcome-copy h1 {
+        font-size: 23px;
+      }
+
+      .gnd-welcome-copy p {
+        font-size: 12px;
+      }
+
+      .gnd-home .gnd-active-order {
+        padding: 17px 14px;
+      }
+
+      .gnd-home .gnd-progress-step small {
+        font-size: 8px;
+      }
+
+      .gnd-home .gnd-progress-step span {
+        width: 29px;
+        height: 29px;
+      }
+
+      .gnd-home .gnd-progress-line {
+        top: 13px;
+      }
+
+      .gnd-home .gnd-service-tile {
+        padding: 13px;
+      }
+
+      .gnd-home .gnd-quick-actions {
+        gap: 9px;
+      }
+
+      .gnd-home .gnd-quick-button {
+        gap: 6px;
+        padding: 11px 8px;
+        font-size: 11px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gnd-home .gnd-welcome,
+      .gnd-home .gnd-active-order,
+      .gnd-home .gnd-service-tile {
+        animation: none;
+      }
+
+      .gnd-home * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+
+    
+/* ==================================
+   FIX POSISI DASHBOARD GLOW N DRY
+================================== */
+
+/* Reset lebar halaman */
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+body.gnd-home-body {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: clip;
+}
+
+/* Pusatkan seluruh isi dashboard */
+body.gnd-home-body > .gnd-home {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+
+  width: 100% !important;
+  max-width: 600px !important;
+  min-width: 0 !important;
+
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  padding: 22px 20px 115px;
+  box-sizing: border-box !important;
+}
+
+/* Pastikan setiap kartu mengikuti lebar dashboard */
+.gnd-home .gnd-welcome,
+.gnd-home .gnd-active-order,
+.gnd-home .gnd-services,
+.gnd-home .gnd-trust-note,
+.gnd-home .gnd-quick-actions {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Navigasi bawah selalu tepat di tengah */
+body.gnd-home-body .gnd-bottom-nav {
+  position: fixed !important;
+
+  left: 50% !important;
+  right: auto !important;
+  bottom: 0 !important;
+
+  transform: translateX(-50%) !important;
+
+  width: 100% !important;
+  max-width: 600px !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Isi navigasi terbagi rata */
+.gnd-home .gnd-bottom-nav .gnd-nav-link {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+}
+
+/* Pastikan layar HP tetap rapi */
+@media (max-width: 600px) {
+  body.gnd-home-body > .gnd-home {
+    padding: 17px 15px 110px;
+  }
+
+  body.gnd-home-body .gnd-bottom-nav {
+    max-width: 100% !important;
+  }
+}
+.gnd-estimate > span:last-child {
+  white-space: pre-line;
+  line-height: 1.8;
+}
+
+/* Estimasi selesai di kartu Cucian Aktif */
+.gnd-home .gnd-estimate {
+  align-items: flex-start;
+  line-height: 1.8;
+}
+
+.gnd-home .gnd-estimate #activeOrderEstimate {
+  display: block;
+  min-width: 0;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.gnd-home .gnd-estimated-completion {
+  display: inline-block;
+  margin-top: 4px;
+  color: #2168b8;
+  font-weight: 800;
+}
+
+body.gnd-dark-mode .gnd-home .gnd-estimated-completion {
+  color: #9bc9ff;
+}
+
+  </style>
+</head>
+
+<body class="gnd-home-body">
+  <main class="gnd-home">
+
+    <!-- HEADER -->
+    <header class="gnd-topbar">
+      <a class="gnd-brand" href="home.html">
+        <span class="gnd-hanger">⌁</span>
+        <span>Glow N Dry</span>
+      </a>
+
+      <button
+        class="gnd-notification"
+        id="notificationButton"
+        type="button"
+        aria-label="Notifikasi"
+        title="Notifikasi"
+      >
+        ♧
+        <span class="gnd-notification-dot"></span>
+      </button>
+    </header>
+
+    <!-- BANNER SAMBUTAN -->
+    <section class="gnd-welcome">
+      <div class="gnd-welcome-copy">
+        <div class="gnd-welcome-tag">
+          ✦ LAUNDRY CARE
+        </div>
+
+        <h1>
+          Hai, <span id="homeCustomerName">Pelanggan</span>! 👋
+        </h1>
+
+        <p>
+          Cucian bersih dan wangi, tanpa ribet.
+          Pantau pesananmu dengan mudah di Glow N Dry.
+        </p>
+      </div>
+
+      <div class="gnd-laundry-art" aria-hidden="true">
+        <div class="gnd-art-bubble bubble-one"></div>
+        <div class="gnd-art-bubble bubble-two"></div>
+
+        <div class="gnd-art-machine">
+          <div class="gnd-art-panel"></div>
+          <div class="gnd-art-door">
+            <div></div>
+          </div>
+        </div>
+
+        <div class="gnd-art-basket">🧺</div>
+      </div>
+    </section>
+
+    <!-- AKSI CEPAT -->
+    <section class="gnd-quick-actions" aria-label="Aksi cepat">
+      <a href="create-order.html" class="gnd-quick-button primary">
+        <span class="gnd-quick-icon">＋</span>
+        <span>Buat Pesanan</span>
+      </a>
+
+      <a href="price-list.html" class="gnd-quick-button">
+        <span class="gnd-quick-icon">▤</span>
+        <span>Lihat Harga</span>
+      </a>
+    </section>
+
+    <!-- PESANAN AKTIF -->
+    <section class="gnd-active-order">
+      <div class="gnd-section-heading">
+        <div>
+          <h2>Pesanan Kamu</h2>
+          <p class="gnd-section-caption">
+            Pantau proses cucianmu di sini.
+          </p>
+        </div>
+      </div>
+
+      <div class="gnd-order-heading">
+        <div class="gnd-order-title">
+          <span class="gnd-mini-icon">▣</span>
+
+          <div>
+            <h2>Cucian Aktif</h2>
+            <p id="activeOrderNumber">Pesanan belum tersedia</p>
+          </div>
+        </div>
+
+        <span class="gnd-status" id="activeOrderStatus">
+          Belum ada
+        </span>
+      </div>
+
+      <div class="gnd-progress" id="laundryProgress">
+        <div class="gnd-progress-line"></div>
+
+        <div class="gnd-progress-step completed">
+          <span>✓</span>
+          <small>Diterima</small>
+        </div>
+
+        <div class="gnd-progress-step">
+          <span>2</span>
+          <small>Dicuci</small>
+        </div>
+
+        <div class="gnd-progress-step">
+          <span>3</span>
+          <small>Dikeringkan</small>
+        </div>
+
+        <div class="gnd-progress-step">
+          <span>4</span>
+          <small>Disetrika</small>
+        </div>
+
+        <div class="gnd-progress-step">
+          <span>5</span>
+          <small>Siap Diambil</small>
+        </div>
+      </div>
+
+      <p class="gnd-estimate">
+        <span>▦</span>
+        <span id="activeOrderEstimate">
+          Pesananmu akan ditampilkan di sini.
+        </span>
+      </p>
+
+      <a
+        href="order-detail.html"
+        class="gnd-detail-button"
+        id="homeOrderButton"
+      >
+        <span style="font-size: 12px;">Lihat Detail Pesanan</span>
+        <span>›</span>
+      </a>
+    </section>
+
+    <!-- LAYANAN -->
+    <section class="gnd-services">
+      <div class="gnd-section-heading">
+        <div>
+          <h2>Layanan Glow N Dry</h2>
+          <p class="gnd-section-caption">
+            Semua kebutuhan laundry, lebih mudah.
+          </p>
+        </div>
+      </div>
+
+      <div class="gnd-service-grid">
+        <a href="price-list.html" class="gnd-service-tile">
+          <span class="gnd-tile-icon">◇</span>
+
+          <span class="gnd-tile-copy">
+            <strong>Daftar Harga</strong>
+            <small>
+              Pilih layanan dan cek harga laundry.
+            </small>
+          </span>
+
+          <span class="gnd-tile-arrow">›</span>
+        </a>
+
+        <a href="store-info.html" class="gnd-service-tile">
+          <span class="gnd-tile-icon">⌖</span>
+
+          <span class="gnd-tile-copy">
+            <strong>Informasi Toko</strong>
+            <small>
+              Lihat alamat, jam buka, dan kontak toko.
+            </small>
+          </span>
+
+          <span class="gnd-tile-arrow">›</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- INFORMASI TAMBAHAN -->
+    <section class="gnd-trust-note">
+      <div class="gnd-trust-icon">✦</div>
+
+      <div>
+        <strong>Perawatan terbaik untuk pakaianmu</strong>
+        <small>
+          Pantau status pesanan dan cek informasi layanan
+          langsung melalui website Glow N Dry.
+        </small>
+      </div>
+    </section>
+
+    <!-- NAVIGASI BAWAH -->
+    <nav class="gnd-bottom-nav" aria-label="Navigasi utama">
+      <a href="home.html" class="gnd-nav-link selected" aria-current="page">
+        <span>◆</span>
+        <small>Beranda</small>
+      </a>
+
+      <a href="history.html" class="gnd-nav-link">
+        <span>▤</span>
+        <small>Riwayat</small>
+      </a>
+
+      <a href="profile.html" class="gnd-nav-link">
+        <span>♙</span>
+        <small>Profil</small>
+      </a>
+    </nav>
+
+  </main>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/theme.js"></script>
+</body>
+</html>

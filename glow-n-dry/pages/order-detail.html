@@ -1,0 +1,1047 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2563eb">
+
+  <title>Detail Pesanan - Glow N Dry</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --detail-blue: #2878d0;
+      --detail-blue-dark: #1455a0;
+      --detail-blue-light: #eaf3ff;
+      --detail-text: #183451;
+      --detail-muted: #718198;
+      --detail-border: #e0eafa;
+      --detail-bg: #f4f8ff;
+      --detail-card: #ffffff;
+      --detail-soft: #f8fbff;
+    }
+
+    html {
+      min-width: 0;
+      width: 100%;
+      overflow-x: clip;
+      scroll-behavior: smooth;
+    }
+
+    body.gnd-detail-body {
+      min-width: 0;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow-x: clip;
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(181, 211, 255, 0.4),
+          transparent 30%
+        ),
+        linear-gradient(180deg, #f1f6ff, #f8faff 60%, #edf4ff);
+      color: var(--detail-text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .gnd-detail-page {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      min-width: 0;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 24px 20px 115px;
+    }
+
+    /* HEADER */
+    .gnd-page-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .gnd-page-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 44px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--detail-border);
+      border-radius: 14px;
+      background: var(--detail-card);
+      color: var(--detail-blue);
+      font-size: 28px;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(35, 82, 140, 0.06);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .gnd-page-back:hover {
+      background: var(--detail-blue-light);
+      transform: translateX(-2px);
+    }
+
+    .gnd-page-header h1 {
+      margin: 0 0 5px;
+      color: #183e6b;
+      font-size: 25px;
+      font-weight: 850;
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+    }
+
+    .gnd-page-header p {
+      margin: 0;
+      color: var(--detail-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* STATUS UTAMA */
+    .gnd-detail-status-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 27px 20px;
+      margin-bottom: 20px;
+      border-radius: 24px;
+      background: linear-gradient(
+        135deg,
+        #1455a0,
+        #2878d0 58%,
+        #69adf5
+      );
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 14px 32px rgba(40, 120, 208, 0.2);
+    }
+
+    .gnd-detail-status-card::before {
+      content: "";
+      position: absolute;
+      top: -75px;
+      right: -35px;
+      width: 170px;
+      height: 170px;
+      border: 1px solid rgba(255, 255, 255, 0.17);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+
+    .gnd-detail-status-icon {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 67px;
+      height: 67px;
+      margin-bottom: 13px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 21px;
+      background: rgba(255, 255, 255, 0.16);
+      font-size: 36px;
+    }
+
+    .gnd-detail-status-label {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 7px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .gnd-detail-status-card h2 {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 10px;
+      color: #fff;
+      font-size: 25px;
+      font-weight: 850;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-detail-order-number {
+      position: relative;
+      z-index: 1;
+      max-width: 100%;
+      margin: 0;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.13);
+      color: #fff;
+      font-size: 11px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    /* ESTIMASI */
+    .gnd-detail-estimate {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      padding: 16px;
+      margin-bottom: 20px;
+      border: 1px solid #d6e7fc;
+      border-radius: 16px;
+      background: linear-gradient(120deg, #eaf3ff, #f9fbff);
+    }
+
+    .gnd-detail-estimate-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: var(--detail-blue);
+      color: #fff;
+      font-size: 21px;
+    }
+
+    .gnd-detail-estimate-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .gnd-detail-estimate-info small {
+      display: block;
+      margin-bottom: 5px;
+      color: #687e99;
+      font-size: 11px;
+    }
+
+    .gnd-detail-estimate-info strong {
+      display: block;
+      color: #1455a0;
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-detail-estimate-info p {
+      margin: 5px 0 0;
+      color: #718198;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    /* KARTU */
+    .gnd-detail-card {
+      width: 100%;
+      min-width: 0;
+      padding: 22px;
+      margin-bottom: 20px;
+      border: 1px solid var(--detail-border);
+      border-radius: 21px;
+      background: var(--detail-card);
+      box-shadow: 0 9px 25px rgba(37, 87, 148, 0.06);
+    }
+
+    .gnd-detail-card h2 {
+      margin: 0 0 18px;
+      color: #183e6b;
+      font-size: 16px;
+      font-weight: 850;
+      letter-spacing: -0.2px;
+    }
+
+    /* RINCIAN PESANAN */
+    .gnd-detail-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      min-width: 0;
+      padding: 12px 0;
+      border-bottom: 1px solid #edf2fa;
+    }
+
+    .gnd-detail-row > span {
+      flex: 1;
+      min-width: 0;
+      color: var(--detail-muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .gnd-detail-row > strong {
+      max-width: 60%;
+      color: #294866;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.7;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-detail-divider {
+      height: 1px;
+      margin: 13px 0 4px;
+      border-top: 1px dashed #cdddf2;
+    }
+
+    .gnd-detail-total-row {
+      align-items: center;
+      padding-bottom: 2px;
+      border-bottom: 0;
+    }
+
+    .gnd-detail-total-row > span {
+      color: #183e6b;
+      font-weight: 800;
+    }
+
+    .gnd-detail-total-row > strong {
+      max-width: 65%;
+      color: #2168b8;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.4px;
+    }
+
+    /* PEMBAYARAN */
+    .gnd-detail-payment-box {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 15px;
+      margin-bottom: 12px;
+      border: 1px solid #dfeafb;
+      border-radius: 15px;
+      background: var(--detail-soft);
+    }
+
+    .gnd-detail-payment-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 43px;
+      width: 43px;
+      height: 43px;
+      border-radius: 13px;
+      background: #e6f1ff;
+      color: var(--detail-blue);
+      font-size: 22px;
+    }
+
+    .gnd-detail-payment-info {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .gnd-detail-payment-info small {
+      color: #8291a5;
+      font-size: 11px;
+    }
+
+    .gnd-detail-payment-info strong {
+      color: #244565;
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-detail-payment-badge {
+      display: inline-block;
+      flex-shrink: 0;
+      max-width: 46%;
+      padding: 7px 9px;
+      border: 1px solid #f2dfad;
+      border-radius: 10px;
+      background: #fff8e8;
+      color: #8a6420;
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.5;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-detail-payment-badge.paid {
+      border-color: #c5defa;
+      background: #eaf3ff;
+      color: #1455a0;
+    }
+
+    .gnd-detail-payment-badge.unpaid {
+      border-color: #f2dfad;
+      background: #fff8e8;
+      color: #8a6420;
+    }
+
+    .gnd-detail-payment-note {
+      margin: 12px 0 0;
+      color: var(--detail-muted);
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    /* CATATAN */
+    .gnd-detail-notes {
+      padding: 14px;
+      margin-top: 17px;
+      border: 1px solid #dce9fa;
+      border-radius: 13px;
+      background: #f5f9ff;
+    }
+
+    .gnd-detail-notes[hidden] {
+      display: none !important;
+    }
+
+    .gnd-detail-notes strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #244565;
+      font-size: 12px;
+    }
+
+    .gnd-detail-notes p {
+      margin: 0;
+      color: var(--detail-muted);
+      font-size: 12px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    /* TIMELINE */
+    .gnd-detail-progress-description {
+      margin: -8px 0 23px;
+      color: var(--detail-muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .gnd-detail-timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .gnd-timeline-item {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      min-height: 75px;
+      padding: 0 0 23px;
+    }
+
+    .gnd-timeline-item:last-child {
+      min-height: 0;
+      padding-bottom: 0;
+    }
+
+    .gnd-timeline-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 36px;
+      bottom: 2px;
+      left: 16px;
+      width: 2px;
+      border-radius: 3px;
+      background: #e0eafa;
+    }
+
+    .gnd-timeline-dot {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 34px;
+      width: 34px;
+      height: 34px;
+      border: 2px solid #dce7f5;
+      border-radius: 50%;
+      background: #f4f7fc;
+      color: #91a1b7;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .gnd-timeline-item > div {
+      flex: 1;
+      min-width: 0;
+      padding-top: 2px;
+    }
+
+    .gnd-timeline-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #4c6581;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.6;
+    }
+
+    .gnd-timeline-item p {
+      margin: 0;
+      color: #8896a9;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .gnd-timeline-item.completed .gnd-timeline-dot,
+    .gnd-timeline-item.active .gnd-timeline-dot {
+      border-color: var(--detail-blue);
+      background: var(--detail-blue);
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(40, 120, 208, 0.16);
+    }
+
+    .gnd-timeline-item.completed strong,
+    .gnd-timeline-item.active strong {
+      color: #1c5da3;
+    }
+
+    .gnd-timeline-item.completed:not(:last-child)::after {
+      background: #75afea;
+    }
+
+    /* PESAN STATUS */
+    .gnd-detail-message:empty {
+      display: none;
+    }
+
+    .gnd-detail-message:not(:empty) {
+      padding: 13px 15px;
+      margin: 0 0 17px;
+      border: 1px solid #d7e7fc;
+      border-radius: 13px;
+      background: #edf5ff;
+      color: #245d9c;
+      font-size: 12px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    /* TOMBOL AKSI */
+    .gnd-detail-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 11px;
+      margin-bottom: 20px;
+    }
+
+    .gnd-detail-secondary,
+    .gnd-detail-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      min-height: 47px;
+      padding: 12px 10px;
+      border: 1px solid #d6e6fb;
+      border-radius: 13px;
+      background: #fff;
+      color: #2168b8;
+      font-size: 11px;
+      font-weight: 850;
+      line-height: 1.5;
+      text-align: center;
+      text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .gnd-detail-primary {
+      border-color: #2878d0;
+      background: linear-gradient(135deg, #3285dd, #1455a0);
+      color: #fff;
+      box-shadow: 0 7px 16px rgba(40, 120, 208, 0.18);
+    }
+
+    .gnd-detail-secondary:hover,
+    .gnd-detail-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    /* NAVIGASI BAWAH */
+    body.gnd-detail-body .gnd-bottom-nav {
+      position: fixed !important;
+      z-index: 100;
+      left: 50% !important;
+      right: auto !important;
+      bottom: 0 !important;
+      transform: translateX(-50%) !important;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-around;
+      gap: 5px;
+      width: 100% !important;
+      max-width: 600px !important;
+      min-width: 0 !important;
+      min-height: 76px;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      margin: 0 !important;
+      border: 1px solid var(--detail-border);
+      border-bottom: 0;
+      border-radius: 22px 22px 0 0;
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 -8px 28px rgba(37, 87, 148, 0.09);
+      backdrop-filter: blur(14px);
+    }
+
+    .gnd-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1 1 0;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 0;
+      padding: 5px 2px;
+      border-radius: 13px;
+      color: #8593a8;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .gnd-nav-icon {
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .gnd-nav-item.active {
+      color: var(--detail-blue);
+    }
+
+    .gnd-nav-item:hover {
+      background: #f0f6ff;
+      color: #1455a0;
+    }
+
+    /* MODE GELAP */
+    body.gnd-dark-mode.gnd-detail-body {
+      color-scheme: dark;
+      background: #0b1220;
+      color: #e7eef9;
+    }
+
+    body.gnd-dark-mode .gnd-page-header h1,
+    body.gnd-dark-mode .gnd-detail-card h2 {
+      color: #e7f0ff;
+    }
+
+    body.gnd-dark-mode .gnd-page-header p,
+    body.gnd-dark-mode .gnd-detail-progress-description {
+      color: #a8b8ce;
+    }
+
+    body.gnd-dark-mode .gnd-page-back {
+      background: #151f31;
+      color: #86bdff;
+      border-color: #2a3a52;
+    }
+
+    body.gnd-dark-mode .gnd-detail-card {
+      background: #151f31;
+      border-color: #2a3a52;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    body.gnd-dark-mode .gnd-detail-row {
+      border-color: #2a3a52;
+    }
+
+    body.gnd-dark-mode .gnd-detail-row > span {
+      color: #a8b8ce;
+    }
+
+    body.gnd-dark-mode .gnd-detail-row > strong,
+    body.gnd-dark-mode .gnd-detail-total-row > span {
+      color: #e7f0ff;
+    }
+
+    body.gnd-dark-mode .gnd-detail-total-row > strong {
+      color: #9bc9ff;
+    }
+
+    body.gnd-dark-mode .gnd-detail-divider {
+      border-color: #354761;
+    }
+
+    body.gnd-dark-mode .gnd-detail-estimate {
+      background: #101f34;
+      border-color: #2a4464;
+    }
+
+    body.gnd-dark-mode .gnd-detail-estimate-info small,
+    body.gnd-dark-mode .gnd-detail-estimate-info p {
+      color: #a8b8ce;
+    }
+
+    body.gnd-dark-mode .gnd-detail-estimate-info strong {
+      color: #9bc9ff;
+    }
+
+    body.gnd-dark-mode .gnd-detail-payment-box,
+    body.gnd-dark-mode .gnd-detail-notes {
+      background: #101f34;
+      border-color: #2a4464;
+    }
+
+    body.gnd-dark-mode .gnd-detail-payment-icon {
+      background: #1b3150;
+      color: #9bc9ff;
+    }
+
+    body.gnd-dark-mode .gnd-detail-payment-info small,
+    body.gnd-dark-mode .gnd-detail-notes p,
+    body.gnd-dark-mode .gnd-detail-payment-note {
+      color: #a8b8ce;
+    }
+
+    body.gnd-dark-mode .gnd-detail-payment-info strong,
+    body.gnd-dark-mode .gnd-detail-notes strong {
+      color: #e7f0ff;
+    }
+
+    body.gnd-dark-mode .gnd-timeline-item strong {
+      color: #bdcde1;
+    }
+
+    body.gnd-dark-mode .gnd-timeline-item p {
+      color: #93a5bd;
+    }
+
+    body.gnd-dark-mode .gnd-timeline-item.active strong,
+    body.gnd-dark-mode .gnd-timeline-item.completed strong {
+      color: #9bc9ff;
+    }
+
+    body.gnd-dark-mode .gnd-timeline-dot {
+      background: #152238;
+      border-color: #354761;
+      color: #a8b8ce;
+    }
+
+    body.gnd-dark-mode .gnd-timeline-item.active .gnd-timeline-dot,
+    body.gnd-dark-mode .gnd-timeline-item.completed .gnd-timeline-dot {
+      background: var(--detail-blue);
+      border-color: var(--detail-blue);
+      color: #fff;
+    }
+
+    body.gnd-dark-mode .gnd-detail-secondary {
+      background: #172943;
+      border-color: #2b4565;
+      color: #9bc9ff;
+    }
+
+    body.gnd-dark-mode.gnd-detail-body .gnd-bottom-nav {
+      background: rgba(13, 22, 37, 0.98);
+      border-color: #2a3a52;
+      box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.22);
+    }
+
+    body.gnd-dark-mode .gnd-nav-item {
+      color: #93a5bd;
+    }
+
+    body.gnd-dark-mode .gnd-nav-item.active {
+      color: #75b4ff;
+    }
+
+    body.gnd-dark-mode .gnd-nav-item:hover {
+      background: #192a43;
+    }
+
+    body.gnd-dark-mode .gnd-detail-message:not(:empty) {
+      background: #132c49;
+      border-color: #294968;
+      color: #bfdbfe;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .gnd-detail-page {
+        padding: 20px 15px 110px;
+      }
+
+      .gnd-page-header h1 {
+        font-size: 23px;
+      }
+
+      .gnd-detail-status-card {
+        padding: 23px 17px;
+        border-radius: 21px;
+      }
+
+      .gnd-detail-card {
+        padding: 19px 16px;
+        border-radius: 19px;
+      }
+
+      body.gnd-detail-body .gnd-bottom-nav {
+        max-width: 100% !important;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .gnd-detail-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .gnd-detail-payment-box {
+        flex-wrap: wrap;
+      }
+
+      .gnd-detail-payment-badge {
+        margin-left: 56px;
+        max-width: calc(100% - 56px);
+      }
+
+      .gnd-detail-row {
+        gap: 9px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="gnd-detail-body">
+
+  <main class="gnd-detail-page">
+
+    <!-- HEADER -->
+    <header class="gnd-page-header">
+      <a href="history.html" class="gnd-page-back" aria-label="Kembali">
+        ‹
+      </a>
+
+      <div>
+        <h1>Detail Pesanan</h1>
+        <p>Informasi lengkap cucianmu</p>
+      </div>
+    </header>
+
+    <!-- STATUS PESANAN -->
+    <section class="gnd-detail-status-card">
+      <div class="gnd-detail-status-icon" aria-hidden="true">🧺</div>
+
+      <p class="gnd-detail-status-label">Status pesanan</p>
+
+      <h2 id="detailStatus">Memuat status...</h2>
+
+      <p id="detailOrderNumber" class="gnd-detail-order-number">-</p>
+    </section>
+
+    <!-- ESTIMASI SELESAI -->
+    <section class="gnd-detail-estimate">
+      <div class="gnd-detail-estimate-icon" aria-hidden="true">◷</div>
+
+      <div class="gnd-detail-estimate-info">
+        <small>Perkiraan penyelesaian</small>
+
+        <strong id="detailEstimatedCompletion">
+          Menghitung estimasi...
+        </strong>
+
+        <p id="detailEstimateNote">
+          Perkiraan dapat berubah sesuai proses laundry.
+        </p>
+      </div>
+    </section>
+
+    <!-- INFORMASI PESANAN -->
+    <section class="gnd-detail-card">
+      <h2>Informasi Pesanan</h2>
+
+      <div class="gnd-detail-row">
+        <span>Tanggal pesanan</span>
+        <strong id="detailDate">-</strong>
+      </div>
+
+      <div class="gnd-detail-row">
+        <span>Nama layanan</span>
+        <strong id="detailService">-</strong>
+      </div>
+
+      <div class="gnd-detail-row">
+        <span>Berat cucian</span>
+        <strong id="detailWeight">-</strong>
+      </div>
+
+      <div class="gnd-detail-row">
+        <span>Harga per kg</span>
+        <strong id="detailPricePerKg">-</strong>
+      </div>
+
+      <div class="gnd-detail-divider"></div>
+
+      <div class="gnd-detail-row">
+        <span>Subtotal</span>
+        <strong id="detailSubtotal">-</strong>
+      </div>
+
+      <div class="gnd-detail-row gnd-detail-total-row">
+        <span>Total pembayaran</span>
+        <strong id="detailTotal">-</strong>
+      </div>
+
+      <div id="detailNotesContainer" class="gnd-detail-notes" hidden>
+        <strong>Catatan pesanan</strong>
+        <p id="detailNotes"></p>
+      </div>
+    </section>
+
+    <!-- INFORMASI PEMBAYARAN -->
+    <section class="gnd-detail-card">
+      <h2>Informasi Pembayaran</h2>
+
+      <div class="gnd-detail-payment-box">
+        <div class="gnd-detail-payment-icon" aria-hidden="true">▣</div>
+
+        <div class="gnd-detail-payment-info">
+          <small>Metode pembayaran</small>
+          <strong id="detailPaymentMethod">Belum dipilih</strong>
+        </div>
+      </div>
+
+      <div class="gnd-detail-payment-box">
+        <div class="gnd-detail-payment-icon" aria-hidden="true">✓</div>
+
+        <div class="gnd-detail-payment-info">
+          <small>Status pembayaran</small>
+          <strong id="detailPaymentStatus">Belum dibayar</strong>
+        </div>
+
+        <span id="detailPaymentBadge" class="gnd-detail-payment-badge unpaid">
+          Belum dibayar
+        </span>
+      </div>
+
+      <p id="detailPaymentNote" class="gnd-detail-payment-note">
+        Status pembayaran mengikuti data pesanan yang tersimpan.
+      </p>
+    </section>
+
+    <!-- PROGRES LAUNDRY -->
+    <section class="gnd-detail-card">
+      <h2>Progres Laundry</h2>
+
+      <p class="gnd-detail-progress-description">
+        Pantau tahapan pengerjaan cucianmu.
+      </p>
+
+      <div class="gnd-detail-timeline" id="detailTimeline">
+
+        <div class="gnd-timeline-item">
+          <span class="gnd-timeline-dot">1</span>
+          <div>
+            <strong>Pesanan Diterima</strong>
+            <p>Pesanan tercatat di Glow N Dry.</p>
+          </div>
+        </div>
+
+        <div class="gnd-timeline-item">
+          <span class="gnd-timeline-dot">2</span>
+          <div>
+            <strong>Sedang Dicuci</strong>
+            <p>Pakaian sedang dibersihkan.</p>
+          </div>
+        </div>
+
+        <div class="gnd-timeline-item">
+          <span class="gnd-timeline-dot">3</span>
+          <div>
+            <strong>Pengeringan</strong>
+            <p>Pakaian sedang dikeringkan.</p>
+          </div>
+        </div>
+
+        <div class="gnd-timeline-item">
+          <span class="gnd-timeline-dot">4</span>
+          <div>
+            <strong>Setrika dan Finishing</strong>
+            <p>Pakaian dirapikan sebelum dikemas.</p>
+          </div>
+        </div>
+
+        <div class="gnd-timeline-item">
+          <span class="gnd-timeline-dot">5</span>
+          <div>
+            <strong>Siap Diambil</strong>
+            <p>Cucian siap diambil pelanggan.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <p id="detailMessage" class="gnd-detail-message" role="status" aria-live="polite"></p>
+
+    <!-- TOMBOL AKSI -->
+    <div class="gnd-detail-actions">
+      <a href="history.html" class="gnd-detail-secondary">
+        Kembali ke Riwayat
+      </a>
+
+      <a href="price-list.html" class="gnd-detail-primary">
+        Pesan Lagi
+      </a>
+    </div>
+
+    <!-- NAVIGASI BAWAH -->
+    <nav class="gnd-bottom-nav" aria-label="Navigasi utama">
+      <a href="home.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon" aria-hidden="true">⌂</span>
+        <span>Beranda</span>
+      </a>
+
+      <a href="history.html" class="gnd-nav-item active" aria-current="page">
+        <span class="gnd-nav-icon" aria-hidden="true">▤</span>
+        <span>Riwayat</span>
+      </a>
+
+      <a href="profile.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon" aria-hidden="true">♙</span>
+        <span>Profil</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <!-- MUAT SETIAP SCRIPT SATU KALI -->
+  <script src="../js/order-detail.js"></script>
+  <script src="../js/theme.js"></script>
+</body>
+</html>

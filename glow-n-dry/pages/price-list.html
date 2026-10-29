@@ -1,0 +1,736 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2563eb">
+
+  <title>Daftar Harga - Glow N Dry</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --blue: #2878d0;
+      --blue-dark: #1455a0;
+      --blue-light: #eaf3ff;
+      --text: #183451;
+      --muted: #718198;
+      --border: #e0eafa;
+      --surface: #ffffff;
+      --soft: #f8fbff;
+    }
+
+    html {
+      width: 100%;
+      overflow-x: clip;
+      scroll-behavior: smooth;
+    }
+
+    body.gnd-price-body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow-x: clip;
+      background:
+        radial-gradient(circle at 90% 0%,
+          rgba(181, 211, 255, 0.4), transparent 30%),
+        linear-gradient(180deg, #f1f6ff, #f8faff 60%, #edf4ff);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .gnd-price-page {
+      width: 100%;
+      max-width: 600px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 24px 20px 115px;
+    }
+
+    /* HEADER */
+    .gnd-page-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .gnd-page-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 44px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--blue);
+      font-size: 28px;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(35, 82, 140, 0.06);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .gnd-page-back:hover {
+      background: var(--blue-light);
+      transform: translateX(-2px);
+    }
+
+    .gnd-page-header h1 {
+      margin: 0 0 5px;
+      color: #183e6b;
+      font-size: 25px;
+      font-weight: 850;
+      letter-spacing: -0.5px;
+    }
+
+    .gnd-page-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* BANNER */
+    .gnd-price-banner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 200px;
+      padding: 25px 22px;
+      margin-bottom: 29px;
+      overflow: hidden;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #1455a0, #2878d0 57%, #69adf5);
+      color: #ffffff;
+      box-shadow: 0 14px 32px rgba(40, 120, 208, 0.2);
+    }
+
+    .gnd-price-banner::before {
+      content: "";
+      position: absolute;
+      top: -65px;
+      right: -40px;
+      width: 175px;
+      height: 175px;
+      border: 1px solid rgba(255, 255, 255, 0.17);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+
+    .gnd-price-banner::after {
+      content: "";
+      position: absolute;
+      right: 100px;
+      bottom: -110px;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.07);
+      pointer-events: none;
+    }
+
+    .gnd-price-banner-content {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .gnd-price-tag {
+      display: inline-flex;
+      padding: 7px 11px;
+      margin-bottom: 13px;
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 1px;
+    }
+
+    .gnd-price-banner h2 {
+      margin: 0 0 10px;
+      color: #ffffff;
+      font-size: clamp(22px, 5vw, 27px);
+      font-weight: 850;
+      line-height: 1.3;
+      letter-spacing: -0.5px;
+    }
+
+    .gnd-price-banner p {
+      max-width: 230px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.91);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .gnd-price-illustration {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 86px;
+      width: 86px;
+      height: 86px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 23px;
+      background: rgba(255, 255, 255, 0.17);
+      font-size: 47px;
+      box-shadow: 0 8px 20px rgba(9, 43, 91, 0.12);
+      transform: rotate(4deg);
+    }
+
+    /* JUDUL LAYANAN */
+    .gnd-price-section h2 {
+      margin: 0 0 6px;
+      color: #183e6b;
+      font-size: 19px;
+      font-weight: 850;
+      letter-spacing: -0.4px;
+    }
+
+    .gnd-price-description {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /* KARTU HARGA */
+    .gnd-price-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .gnd-price-card {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      width: 100%;
+      min-width: 0;
+      padding: 17px 15px;
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      background: var(--surface);
+      box-shadow: 0 8px 23px rgba(37, 87, 148, 0.055);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .gnd-price-card:hover {
+      transform: translateY(-2px);
+      border-color: #c7defb;
+      box-shadow: 0 12px 27px rgba(37, 87, 148, 0.09);
+    }
+
+    .gnd-price-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 54px;
+      width: 54px;
+      height: 54px;
+      border: 1px solid #dce9fa;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #e6f1ff, #f4f8ff);
+      color: var(--blue);
+      font-size: 28px;
+    }
+
+    .gnd-price-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .gnd-price-info h3 {
+      margin: 0 0 5px;
+      color: #183e6b;
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-price-info p {
+      margin: 0 0 9px;
+      color: #7a899e;
+      font-size: 11px;
+      line-height: 1.65;
+    }
+
+    .gnd-price-info strong {
+      color: #2168b8;
+      font-size: 17px;
+      font-weight: 850;
+      line-height: 1.4;
+    }
+
+    .gnd-price-info strong small {
+      color: #8291a5;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* TOMBOL PESAN */
+    .gnd-order-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      min-width: 66px;
+      min-height: 39px;
+      padding: 10px 13px;
+      border: 1px solid #2878d0;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #3285dd, #1455a0);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 850;
+      cursor: pointer;
+      box-shadow: 0 5px 12px rgba(40, 120, 208, 0.16);
+      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    }
+
+    .gnd-order-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 17px rgba(40, 120, 208, 0.24);
+      filter: brightness(1.05);
+    }
+
+    .gnd-order-button:active {
+      transform: scale(0.97);
+    }
+
+    .gnd-order-button:focus-visible,
+    .gnd-page-back:focus-visible,
+    .gnd-nav-item:focus-visible {
+      outline: 3px solid rgba(40, 120, 208, 0.3);
+      outline-offset: 3px;
+    }
+
+    /* CATATAN */
+    .gnd-price-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+      padding: 15px;
+      margin-top: 22px;
+      border: 1px solid #dce9fa;
+      border-radius: 15px;
+      background: #f3f8ff;
+    }
+
+    .gnd-price-note > span {
+      flex: 0 0 auto;
+      font-size: 19px;
+      line-height: 1.4;
+    }
+
+    .gnd-price-note p {
+      margin: 0;
+      color: #637b98;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    /* NAVIGASI BAWAH */
+    body.gnd-price-body .gnd-bottom-nav {
+      position: fixed !important;
+      z-index: 100;
+      left: 50% !important;
+      right: auto !important;
+      bottom: 0 !important;
+      transform: translateX(-50%) !important;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-around;
+      gap: 5px;
+      width: 100% !important;
+      max-width: 600px !important;
+      min-width: 0 !important;
+      min-height: 76px;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      margin: 0 !important;
+      border: 1px solid var(--border);
+      border-bottom: 0;
+      border-radius: 22px 22px 0 0;
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 -8px 28px rgba(37, 87, 148, 0.09);
+      backdrop-filter: blur(14px);
+    }
+
+    .gnd-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1 1 0;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 0;
+      padding: 5px 2px;
+      border-radius: 13px;
+      color: #8593a8;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .gnd-nav-icon {
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .gnd-nav-item:hover,
+    .gnd-nav-item.active {
+      background: #f0f6ff;
+      color: #1455a0;
+    }
+
+    /* DARK MODE */
+    body.gnd-dark-mode.gnd-price-body {
+      color-scheme: dark;
+      background: #0b1220;
+      color: #e7eef9;
+    }
+
+    body.gnd-dark-mode .gnd-page-header h1,
+    body.gnd-dark-mode .gnd-price-section h2,
+    body.gnd-dark-mode .gnd-price-info h3 {
+      color: #e7f0ff;
+    }
+
+    body.gnd-dark-mode .gnd-page-header p,
+    body.gnd-dark-mode .gnd-price-description {
+      color: #a8b8ce;
+    }
+
+    body.gnd-dark-mode .gnd-page-back {
+      background: #151f31;
+      color: #86bdff;
+      border-color: #2a3a52;
+    }
+
+    body.gnd-dark-mode .gnd-price-card {
+      background: #151f31;
+      border-color: #2a3a52;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    body.gnd-dark-mode .gnd-price-info p,
+    body.gnd-dark-mode .gnd-price-info strong small {
+      color: #a8b8ce;
+    }
+
+    body.gnd-dark-mode .gnd-price-info strong {
+      color: #9bc9ff;
+    }
+
+    body.gnd-dark-mode .gnd-price-icon {
+      background: #1b3150;
+      border-color: #2a4568;
+      color: #9bc9ff;
+    }
+
+    body.gnd-dark-mode .gnd-price-note {
+      background: #101f34;
+      border-color: #2a4464;
+    }
+
+    body.gnd-dark-mode .gnd-price-note p {
+      color: #c4d9f5;
+    }
+
+    body.gnd-dark-mode.gnd-price-body .gnd-bottom-nav {
+      background: rgba(13, 22, 37, 0.98);
+      border-color: #2a3a52;
+      box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.22);
+    }
+
+    body.gnd-dark-mode .gnd-nav-item {
+      color: #93a5bd;
+    }
+
+    body.gnd-dark-mode .gnd-nav-item:hover,
+    body.gnd-dark-mode .gnd-nav-item.active {
+      background: #192a43;
+      color: #75b4ff;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .gnd-price-page {
+        padding: 20px 15px 110px;
+      }
+
+      .gnd-page-header h1 {
+        font-size: 23px;
+      }
+
+      .gnd-price-banner {
+        min-height: 185px;
+        padding: 21px 17px;
+        border-radius: 21px;
+      }
+
+      .gnd-price-illustration {
+        flex-basis: 69px;
+        width: 69px;
+        height: 69px;
+        border-radius: 19px;
+        font-size: 38px;
+      }
+
+      .gnd-price-card {
+        gap: 10px;
+        padding: 14px 11px;
+        border-radius: 17px;
+      }
+
+      .gnd-price-icon {
+        flex-basis: 45px;
+        width: 45px;
+        height: 45px;
+        border-radius: 13px;
+        font-size: 24px;
+      }
+
+      .gnd-price-info h3 {
+        font-size: 13px;
+      }
+
+      .gnd-price-info p {
+        font-size: 10px;
+      }
+
+      .gnd-price-info strong {
+        font-size: 15px;
+      }
+
+      .gnd-order-button {
+        min-width: 56px;
+        min-height: 36px;
+        padding: 9px 10px;
+        font-size: 10px;
+      }
+
+      body.gnd-price-body .gnd-bottom-nav {
+        max-width: 100% !important;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .gnd-price-page {
+        padding-right: 12px;
+        padding-left: 12px;
+      }
+
+      .gnd-price-card {
+        gap: 8px;
+        padding: 12px 9px;
+      }
+
+      .gnd-price-icon {
+        flex-basis: 40px;
+        width: 40px;
+        height: 40px;
+        font-size: 21px;
+      }
+
+      .gnd-order-button {
+        min-width: 49px;
+        padding: 8px;
+      }
+
+      .gnd-price-illustration {
+        flex-basis: 57px;
+        width: 57px;
+        height: 57px;
+        font-size: 32px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="gnd-price-body">
+
+  <main class="gnd-price-page">
+
+    <!-- HEADER -->
+    <header class="gnd-page-header">
+      <a href="home.html" class="gnd-page-back" aria-label="Kembali">
+        ‹
+      </a>
+
+      <div>
+        <h1>Daftar Harga</h1>
+        <p>Pilih layanan laundry favoritmu</p>
+      </div>
+    </header>
+
+    <!-- BANNER -->
+    <section class="gnd-price-banner">
+      <div class="gnd-price-banner-content">
+        <span class="gnd-price-tag">GLOW N DRY</span>
+
+        <h2>Jangan khawatir<br>tentang cucianmu!</h2>
+
+        <p>
+          Biar kami yang urus pakaianmu.
+          Kamu tinggal duduk santai.
+        </p>
+      </div>
+
+      <div class="gnd-price-illustration" aria-hidden="true">
+        🧺
+      </div>
+    </section>
+
+    <!-- DAFTAR LAYANAN -->
+    <section class="gnd-price-section">
+      <h2>Pilih Layanan</h2>
+
+      <p class="gnd-price-description">
+        Temukan layanan yang sesuai dengan kebutuhanmu.
+      </p>
+
+      <div class="gnd-price-list">
+
+        <article class="gnd-price-card">
+          <div class="gnd-price-icon" aria-hidden="true">👕</div>
+
+          <div class="gnd-price-info">
+            <h3>Cuci Kering</h3>
+            <p>Cuci dan keringkan pakaianmu.</p>
+            <strong>Rp5.000 <small>/ kg</small></strong>
+          </div>
+
+          <button
+            type="button"
+            class="gnd-order-button"
+            data-service="Cuci Kering"
+            data-price="5000">
+            Pesan
+          </button>
+        </article>
+
+        <article class="gnd-price-card">
+          <div class="gnd-price-icon" aria-hidden="true">👔</div>
+
+          <div class="gnd-price-info">
+            <h3>Cuci Setrika</h3>
+            <p>Pakaian bersih, rapi, dan wangi.</p>
+            <strong>Rp7.000 <small>/ kg</small></strong>
+          </div>
+
+          <button
+            type="button"
+            class="gnd-order-button"
+            data-service="Cuci Setrika"
+            data-price="7000">
+            Pesan
+          </button>
+        </article>
+
+        <article class="gnd-price-card">
+          <div class="gnd-price-icon" aria-hidden="true">♨️</div>
+
+          <div class="gnd-price-info">
+            <h3>Setrika Saja</h3>
+            <p>Bikin pakaian lebih rapi.</p>
+            <strong>Rp4.000 <small>/ kg</small></strong>
+          </div>
+
+          <button
+            type="button"
+            class="gnd-order-button"
+            data-service="Setrika"
+            data-price="4000">
+            Pesan
+          </button>
+        </article>
+
+        <article class="gnd-price-card">
+          <div class="gnd-price-icon" aria-hidden="true">🫧</div>
+
+          <div class="gnd-price-info">
+            <h3>Cuci Express</h3>
+            <p>Layanan cepat untuk kebutuhanmu.</p>
+            <strong>Rp10.000 <small>/ kg</small></strong>
+          </div>
+
+          <button
+            type="button"
+            class="gnd-order-button"
+            data-service="Express"
+            data-price="10000">
+            Pesan
+          </button>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CATATAN HARGA -->
+    <section class="gnd-price-note">
+      <span aria-hidden="true">ℹ️</span>
+
+      <p>
+        Harga di atas merupakan harga contoh. Sesuaikan dengan tarif
+        resmi Glow N Dry. Total akhir dihitung berdasarkan layanan
+        dan berat cucian.
+      </p>
+    </section>
+
+    <!-- NAVIGASI BAWAH -->
+    <nav class="gnd-bottom-nav" aria-label="Navigasi utama">
+      <a href="home.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon" aria-hidden="true">⌂</span>
+        <span>Beranda</span>
+      </a>
+
+      <a href="history.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon" aria-hidden="true">▤</span>
+        <span>Riwayat</span>
+      </a>
+
+      <a href="profile.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon" aria-hidden="true">♙</span>
+        <span>Profil</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <script src="../js/orders.js"></script>
+  <script src="../js/theme.js"></script>
+</body>
+</html>

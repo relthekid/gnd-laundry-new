@@ -1,0 +1,990 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2563eb">
+
+  <title>Buat Pesanan - Glow N Dry</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --blue: #2878d0;
+      --blue-dark: #1455a0;
+      --blue-light: #eaf3ff;
+      --text: #183451;
+      --muted: #718198;
+      --border: #e0eafa;
+      --surface: #ffffff;
+      --soft: #f8fbff;
+    }
+
+    html {
+      width: 100%;
+      overflow-x: clip;
+      scroll-behavior: smooth;
+    }
+
+    body.gnd-create-order-body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow-x: clip;
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(181, 211, 255, 0.4),
+          transparent 30%
+        ),
+        linear-gradient(180deg, #f1f6ff, #f8faff 60%, #edf4ff);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .gnd-create-order-page {
+      width: 100%;
+      max-width: 600px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 23px 19px 115px;
+    }
+
+    /* HEADER */
+    .gnd-page-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 23px;
+    }
+
+    .gnd-page-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 44px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--blue);
+      font-size: 28px;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(35, 82, 140, 0.06);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .gnd-page-back:hover {
+      background: var(--blue-light);
+      transform: translateX(-2px);
+    }
+
+    .gnd-page-header h1 {
+      margin: 0 0 4px;
+      color: #183e6b;
+      font-size: 24px;
+      font-weight: 850;
+      letter-spacing: -0.5px;
+    }
+
+    .gnd-page-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* BANNER */
+    .gnd-create-order-banner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      overflow: hidden;
+      padding: 23px 20px;
+      margin-bottom: 22px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #1455a0, #2878d0 58%, #69adf5);
+      color: #ffffff;
+      box-shadow: 0 12px 28px rgba(40, 120, 208, 0.19);
+    }
+
+    .gnd-create-order-banner::before {
+      content: "";
+      position: absolute;
+      top: -65px;
+      right: -28px;
+      width: 150px;
+      height: 150px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+
+    .gnd-create-order-banner-content {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .gnd-create-order-banner-content > span {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #dbeafe;
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 1.5px;
+    }
+
+    .gnd-create-order-banner h2 {
+      margin: 0 0 7px;
+      color: #ffffff;
+      font-size: 21px;
+      font-weight: 850;
+      line-height: 1.4;
+    }
+
+    .gnd-create-order-banner p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    .gnd-create-order-icon {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 68px;
+      width: 68px;
+      height: 68px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      font-size: 37px;
+    }
+
+    /* KARTU FORM */
+    .gnd-create-order-card {
+      padding: 21px;
+      margin-bottom: 19px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: 0 8px 24px rgba(37, 87, 148, 0.055);
+    }
+
+    .gnd-create-order-card > h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 20px;
+      color: #183e6b;
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .gnd-create-order-card > h2::before {
+      content: "";
+      display: block;
+      flex: 0 0 4px;
+      height: 21px;
+      border-radius: 4px;
+      background: var(--blue);
+    }
+
+    .gnd-create-order-card > p {
+      margin: -10px 0 17px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /* FIELD */
+    .gnd-create-order-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+      margin-bottom: 17px;
+    }
+
+    .gnd-create-order-field:last-child {
+      margin-bottom: 0;
+    }
+
+    .gnd-create-order-field label {
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .gnd-create-order-field input,
+    .gnd-create-order-field select,
+    .gnd-create-order-field textarea {
+      width: 100%;
+      min-width: 0;
+      min-height: 47px;
+      padding: 12px 13px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      outline: none;
+      background: var(--soft);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 13px;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .gnd-create-order-field input::placeholder,
+    .gnd-create-order-field textarea::placeholder {
+      color: #94a3b8;
+    }
+
+    .gnd-create-order-field input:focus,
+    .gnd-create-order-field select:focus,
+    .gnd-create-order-field textarea:focus {
+      border-color: #60a5fa;
+      background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+    }
+
+    .gnd-create-order-field textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .gnd-create-order-help {
+      margin: -1px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    /* METODE PEMBAYARAN */
+    .gnd-payment-section {
+      scroll-margin-top: 20px;
+    }
+
+    .gnd-payment-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 15px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--soft);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .gnd-payment-option:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .gnd-payment-option:has(input:checked) {
+      border-color: var(--blue);
+      background: #eff6ff;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.06);
+    }
+
+    .gnd-payment-option input[type="radio"] {
+      display: inline-block;
+      flex: 0 0 16px;
+      width: 16px;
+      min-width: 16px;
+      max-width: 16px;
+      height: 16px;
+      min-height: 16px;
+      padding: 0;
+      margin: 4px 0 0;
+      border: initial;
+      border-radius: 50%;
+      box-shadow: none;
+      outline: none;
+      accent-color: var(--blue);
+      appearance: auto;
+      -webkit-appearance: radio;
+      cursor: pointer;
+    }
+
+    .gnd-payment-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 43px;
+      width: 43px;
+      height: 43px;
+      border-radius: 13px;
+      background: #e6f1ff;
+      color: var(--blue);
+      font-size: 22px;
+    }
+
+    .gnd-payment-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .gnd-payment-info strong {
+      display: block;
+      margin: 1px 0 5px;
+      color: #183e6b;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .gnd-payment-info small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    #paymentMethodInfo {
+      display: none;
+      padding: 12px 13px;
+      margin-top: 12px;
+      border: 1px solid #d6e7fc;
+      border-radius: 12px;
+      background: #eff6ff;
+      color: #245d9c;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    #paymentMethodInfo.visible {
+      display: block;
+    }
+
+    /* RINGKASAN TOTAL */
+    .gnd-order-total-card {
+      padding: 20px;
+      margin-bottom: 19px;
+      border: 1px solid #d6e7fc;
+      border-radius: 18px;
+      background: linear-gradient(130deg, #eff6ff, #f8fbff);
+    }
+
+    .gnd-order-total-card > div {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #dfebfa;
+    }
+
+    .gnd-order-total-card > div span {
+      color: #718198;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .gnd-order-total-card > div strong {
+      color: #294866;
+      font-size: 12px;
+      font-weight: 800;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .gnd-order-total-card .gnd-order-total-line {
+      align-items: center;
+      padding: 15px 0 2px;
+      margin-top: 5px;
+      border-top: 1px dashed #c6dcf7;
+      border-bottom: 0;
+    }
+
+    .gnd-order-total-card .gnd-order-total-line span {
+      color: #183e6b;
+      font-weight: 800;
+    }
+
+    .gnd-order-total-card .gnd-order-total-line strong {
+      color: #2168b8;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+    }
+
+    .gnd-order-total-card > p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.8;
+    }
+
+    /* PESAN VALIDASI */
+    .gnd-create-order-message {
+      min-height: 18px;
+      margin: 0 0 12px;
+      color: #dc2626;
+      font-size: 12px;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+
+    /* BUTTON */
+    .gnd-create-order-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      min-height: 51px;
+      padding: 14px 17px;
+      border: 0;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #3285dd, #1455a0);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 850;
+      cursor: pointer;
+      box-shadow: 0 7px 17px rgba(40, 120, 208, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    }
+
+    .gnd-create-order-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 23px rgba(40, 120, 208, 0.25);
+    }
+
+    .gnd-create-order-submit:disabled {
+      cursor: wait;
+      opacity: 0.7;
+      transform: none;
+    }
+
+    .gnd-create-order-cancel {
+      display: block;
+      margin-top: 13px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 750;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .gnd-create-order-cancel:hover {
+      text-decoration: underline;
+    }
+
+    .gnd-create-order-terms {
+      margin: 13px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    /* NAVIGASI BAWAH */
+    body.gnd-create-order-body .gnd-bottom-nav {
+      position: fixed !important;
+      z-index: 100;
+      left: 50% !important;
+      right: auto !important;
+      bottom: 0 !important;
+      transform: translateX(-50%) !important;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-around;
+      gap: 5px;
+      width: 100% !important;
+      max-width: 600px !important;
+      min-width: 0 !important;
+      min-height: 76px;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      margin: 0 !important;
+      border: 1px solid var(--border);
+      border-bottom: 0;
+      border-radius: 22px 22px 0 0;
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 -8px 28px rgba(37, 87, 148, 0.09);
+      backdrop-filter: blur(14px);
+    }
+
+    .gnd-create-order-page .gnd-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1 1 0;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 0;
+      padding: 5px 2px;
+      border-radius: 13px;
+      color: #8593a8;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .gnd-create-order-page .gnd-nav-icon {
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .gnd-create-order-page .gnd-nav-item:hover,
+    .gnd-create-order-page .gnd-nav-item.active {
+      background: #f0f6ff;
+      color: var(--blue);
+    }
+
+    /* MODE GELAP */
+    body.gnd-dark-mode.gnd-create-order-body {
+      color-scheme: dark;
+      background: #0b1220;
+      color: #e7eef9;
+    }
+
+    body.gnd-dark-mode .gnd-page-header h1,
+    body.gnd-dark-mode .gnd-create-order-card > h2 {
+      color: #e7f0ff;
+    }
+
+    body.gnd-dark-mode .gnd-page-header p,
+    body.gnd-dark-mode .gnd-create-order-help,
+    body.gnd-dark-mode .gnd-create-order-terms {
+      color: #a8b8ce;
+    }
+
+    body.gnd-dark-mode .gnd-page-back {
+      background: #151f31;
+      border-color: #2a3a52;
+      color: #86bdff;
+    }
+
+    body.gnd-dark-mode .gnd-create-order-card {
+      background: #151f31;
+      border-color: #2a3a52;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    body.gnd-dark-mode .gnd-create-order-field label {
+      color: #e7f0ff;
+    }
+
+    body.gnd-dark-mode .gnd-create-order-field input,
+    body.gnd-dark-mode .gnd-create-order-field select,
+    body.gnd-dark-mode .gnd-create-order-field textarea {
+      background: #101f34;
+      border-color: #2a4464;
+      color: #e7eef9;
+    }
+
+    body.gnd-dark-mode .gnd-create-order-field input:focus,
+    body.gnd-dark-mode .gnd-create-order-field select:focus,
+    body.gnd-dark-mode .gnd-create-order-field textarea:focus {
+      background: #142943;
+      border-color: #60a5fa;
+    }
+
+    body.gnd-dark-mode .gnd-order-total-card {
+      background: #101f34;
+      border-color: #2a4464;
+    }
+
+    body.gnd-dark-mode .gnd-order-total-card > div {
+      border-color: #2a3a52;
+    }
+
+    body.gnd-dark-mode .gnd-order-total-card > div span {
+      color: #a8b8ce;
+    }
+
+    body.gnd-dark-mode .gnd-order-total-card > div strong,
+    body.gnd-dark-mode .gnd-order-total-card .gnd-order-total-line span {
+      color: #e7f0ff;
+    }
+
+    body.gnd-dark-mode .gnd-order-total-card .gnd-order-total-line strong {
+      color: #9bc9ff;
+    }
+
+    body.gnd-dark-mode .gnd-order-total-card > p {
+      color: #a8b8ce;
+    }
+
+    body.gnd-dark-mode .gnd-payment-option {
+      background: #101f34;
+      border-color: #2a4464;
+    }
+
+    body.gnd-dark-mode .gnd-payment-option:has(input:checked) {
+      background: #172c49;
+      border-color: #60a5fa;
+    }
+
+    body.gnd-dark-mode .gnd-payment-icon {
+      background: #1b3150;
+      color: #9bc9ff;
+    }
+
+    body.gnd-dark-mode .gnd-payment-info strong {
+      color: #e7f0ff;
+    }
+
+    body.gnd-dark-mode .gnd-payment-info small {
+      color: #a8b8ce;
+    }
+
+    body.gnd-dark-mode #paymentMethodInfo {
+      background: #132c49;
+      border-color: #294968;
+      color: #bfdbfe;
+    }
+
+    body.gnd-dark-mode .gnd-create-order-cancel {
+      color: #9bc9ff;
+    }
+
+    body.gnd-dark-mode.gnd-create-order-body .gnd-bottom-nav {
+      background: rgba(13, 22, 37, 0.98);
+      border-color: #2a3a52;
+      box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.22);
+    }
+
+    body.gnd-dark-mode .gnd-create-order-page .gnd-nav-item {
+      color: #93a5bd;
+    }
+
+    body.gnd-dark-mode .gnd-create-order-page .gnd-nav-item.active {
+      color: #75b4ff;
+      background: #192a43;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .gnd-create-order-page {
+        padding: 20px 14px 110px;
+      }
+
+      .gnd-page-header h1 {
+        font-size: 22px;
+      }
+
+      .gnd-create-order-banner {
+        padding: 20px 16px;
+        border-radius: 20px;
+      }
+
+      .gnd-create-order-banner h2 {
+        font-size: 19px;
+      }
+
+      .gnd-create-order-icon {
+        flex-basis: 58px;
+        width: 58px;
+        height: 58px;
+        border-radius: 17px;
+        font-size: 31px;
+      }
+
+      .gnd-create-order-card {
+        padding: 18px 15px;
+        border-radius: 18px;
+      }
+
+      .gnd-order-total-card {
+        padding: 17px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .gnd-create-order-page {
+        padding-right: 11px;
+        padding-left: 11px;
+      }
+
+      .gnd-payment-option {
+        gap: 8px;
+        padding: 12px 9px;
+      }
+
+      .gnd-payment-icon {
+        flex-basis: 36px;
+        width: 36px;
+        height: 36px;
+        font-size: 19px;
+      }
+
+      .gnd-payment-info small {
+        font-size: 10px;
+      }
+
+      .gnd-order-total-card .gnd-order-total-line strong {
+        font-size: 19px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="gnd-create-order-body">
+
+  <main class="gnd-create-order-page">
+
+    <!-- HEADER -->
+    <header class="gnd-page-header">
+      <a href="price-list.html" class="gnd-page-back" aria-label="Kembali">
+        ‹
+      </a>
+
+      <div>
+        <h1>Buat Pesanan</h1>
+        <p>Isi detail cucianmu di bawah ini.</p>
+      </div>
+    </header>
+
+    <!-- BANNER -->
+    <section class="gnd-create-order-banner">
+      <div class="gnd-create-order-banner-content">
+        <span>GLOW N DRY LAUNDRY</span>
+        <h2>Waktunya cucian jadi bersih!</h2>
+        <p>Isi data dengan benar sebelum membuat pesanan.</p>
+      </div>
+
+      <div class="gnd-create-order-icon" aria-hidden="true">🧺</div>
+    </section>
+
+    <form id="createOrderForm" class="gnd-create-order-form">
+
+      <!-- DETAIL LAYANAN -->
+      <section class="gnd-create-order-card">
+        <h2>Detail Layanan</h2>
+
+        <div class="gnd-create-order-field">
+          <label for="orderService">Jenis Layanan *</label>
+
+          <select id="orderService" name="service" required>
+            <option value="" data-price="0">Pilih layanan laundry</option>
+            <option value="Cuci Kering" data-price="5000">
+              Cuci Kering — Rp5.000/kg
+            </option>
+            <option value="Cuci Setrika" data-price="7000">
+              Cuci Setrika — Rp7.000/kg
+            </option>
+            <option value="Setrika" data-price="4000">
+              Setrika Saja — Rp4.000/kg
+            </option>
+            <option value="Express" data-price="10000">
+              Cuci Express — Rp10.000/kg
+            </option>
+          </select>
+        </div>
+
+        <div class="gnd-create-order-field">
+          <label for="orderWeight">Berat Cucian (kg) *</label>
+
+          <input
+            id="orderWeight"
+            name="weight"
+            type="number"
+            min="1"
+            max="100"
+            step="0.5"
+            value="1"
+            required
+          >
+
+          <p class="gnd-create-order-help">
+            Minimal 1 kg dan berat dapat menggunakan kelipatan 0,5 kg.
+          </p>
+        </div>
+
+        <div class="gnd-create-order-field">
+          <label for="orderNotes">Catatan Tambahan (Opsional)</label>
+
+          <textarea
+            id="orderNotes"
+            name="notes"
+            rows="3"
+            placeholder="Contoh: pakaian putih dipisahkan..."
+          ></textarea>
+        </div>
+      </section>
+
+      <!-- DATA PELANGGAN -->
+      <section class="gnd-create-order-card">
+        <h2>Data Pelanggan</h2>
+
+        <div class="gnd-create-order-field">
+          <label for="orderCustomerName">Nama Lengkap *</label>
+
+          <input
+            id="orderCustomerName"
+            name="customerName"
+            type="text"
+            placeholder="Masukkan nama lengkap"
+            autocomplete="name"
+            minlength="2"
+            required
+          >
+        </div>
+
+        <div class="gnd-create-order-field">
+          <label for="orderCustomerPhone">Nomor WhatsApp *</label>
+
+          <input
+            id="orderCustomerPhone"
+            name="customerPhone"
+            type="tel"
+            placeholder="Contoh: 081234567890"
+            autocomplete="tel"
+            inputmode="tel"
+            required
+          >
+
+          <p class="gnd-create-order-help">
+            Gunakan nomor aktif agar mudah dihubungi jika diperlukan.
+          </p>
+        </div>
+      </section>
+
+      <!-- METODE PEMBAYARAN -->
+      <section class="gnd-create-order-card gnd-payment-section">
+        <h2>Metode Pembayaran</h2>
+
+        <p>Pilih metode pembayaran yang kamu inginkan.</p>
+
+        <label class="gnd-payment-option" for="paymentQRIS">
+          <input
+            type="radio"
+            id="paymentQRIS"
+            name="paymentMethod"
+            value="QRIS"
+            required
+          >
+
+          <span class="gnd-payment-icon" aria-hidden="true">▦</span>
+
+          <span class="gnd-payment-info">
+            <strong>QRIS</strong>
+            <small>
+              Metode QRIS dipilih. Ikuti instruksi dari toko.
+            </small>
+          </span>
+        </label>
+
+        <label class="gnd-payment-option" for="paymentStore">
+          <input
+            type="radio"
+            id="paymentStore"
+            name="paymentMethod"
+            value="Bayar di Toko"
+            required
+          >
+
+          <span class="gnd-payment-icon" aria-hidden="true">🏪</span>
+
+          <span class="gnd-payment-info">
+            <strong>Bayar di Toko</strong>
+            <small>
+              Lakukan pembayaran secara langsung di toko.
+            </small>
+          </span>
+        </label>
+
+        <div
+          id="paymentMethodInfo"
+          class="gnd-payment-selected"
+          role="status"
+          aria-live="polite"
+        ></div>
+      </section>
+
+      <!-- RINGKASAN HARGA -->
+      <section class="gnd-order-total-card">
+        <div>
+          <span>Harga per kg</span>
+          <strong id="orderPricePerKg">Rp0</strong>
+        </div>
+
+        <div>
+          <span>Berat Cucian</span>
+          <strong id="orderWeightSummary">1 kg</strong>
+        </div>
+
+        <div class="gnd-order-total-line">
+          <span>Total Estimasi</span>
+          <strong id="orderGrandTotal">Rp0</strong>
+        </div>
+
+        <p>
+          Harga akhir dapat menyesuaikan berat cucian setelah ditimbang.
+        </p>
+      </section>
+
+      <!-- PESAN DAN TOMBOL -->
+      <p
+        id="createOrderMessage"
+        class="gnd-create-order-message"
+        role="status"
+        aria-live="polite"
+      ></p>
+
+      <button type="submit" class="gnd-create-order-submit">
+        <span>Buat Pesanan</span>
+        <span aria-hidden="true">→</span>
+      </button>
+
+      <a href="price-list.html" class="gnd-create-order-cancel">
+        Kembali ke Daftar Harga
+      </a>
+
+      <p class="gnd-create-order-terms">
+        Periksa data, layanan, dan total harga sebelum membuat pesanan.
+      </p>
+    </form>
+
+    <!-- NAVIGASI BAWAH -->
+    <nav class="gnd-bottom-nav" aria-label="Navigasi utama">
+      <a href="home.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon" aria-hidden="true">⌂</span>
+        <span>Beranda</span>
+      </a>
+
+      <a href="history.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon" aria-hidden="true">▤</span>
+        <span>Riwayat</span>
+      </a>
+
+      <a href="profile.html" class="gnd-nav-item">
+        <span class="gnd-nav-icon" aria-hidden="true">♙</span>
+        <span>Profil</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <!-- Setiap script dimuat satu kali -->
+  <script src="../js/create-order.js"></script>
+  <script src="../js/theme.js"></script>
+</body>
+</html>

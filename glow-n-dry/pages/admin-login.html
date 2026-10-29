@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Login Admin - Glow N Dry</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/auth.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body.gnd-admin-login-body {
+      --admin-primary: #2563eb;
+      --admin-primary-dark: #1d4ed8;
+      --admin-text: #172554;
+      --admin-muted: #64748b;
+      --admin-border: #dbeafe;
+      --admin-card: #ffffff;
+
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0;
+      padding: 24px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--admin-text);
+      background:
+        radial-gradient(
+          circle at 12% 15%,
+          rgba(147, 197, 253, 0.38),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 88% 85%,
+          rgba(96, 165, 250, 0.24),
+          transparent 32%
+        ),
+        linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #f8fbff 100%);
+    }
+
+    .gnd-admin-login-card {
+      width: 100%;
+      max-width: 440px;
+      position: relative;
+      padding: 34px;
+      overflow: hidden;
+      background: var(--admin-card);
+      border: 1px solid rgba(191, 219, 254, 0.8);
+      border-radius: 26px;
+      box-shadow: 0 24px 65px rgba(30, 64, 175, 0.14);
+      animation: adminCardIn 0.45s ease-out;
+    }
+
+    .gnd-admin-login-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #1d4ed8, #60a5fa, #93c5fd);
+    }
+
+    .gnd-admin-login-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 28px;
+      color: #2563eb;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 650;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .gnd-admin-login-back:hover {
+      color: #1d4ed8;
+      transform: translateX(-3px);
+    }
+
+    .gnd-admin-login-logo {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 24px;
+      background: linear-gradient(145deg, #2563eb, #60a5fa);
+      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.24);
+      font-size: 37px;
+    }
+
+    .gnd-admin-login-label {
+      display: block;
+      margin-bottom: 9px;
+      color: #2563eb;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-align: center;
+    }
+
+    .gnd-admin-login-card h1 {
+      margin: 0;
+      color: var(--admin-text);
+      font-size: 29px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      text-align: center;
+    }
+
+    .gnd-admin-login-desc {
+      margin: 10px 0 28px;
+      color: var(--admin-muted);
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .gnd-admin-login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .gnd-admin-login-form label {
+      margin-top: 8px;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .gnd-admin-login-form input {
+      width: 100%;
+      min-height: 49px;
+      padding: 13px 15px;
+      border: 1px solid var(--admin-border);
+      border-radius: 12px;
+      outline: none;
+      background: #f8fbff;
+      color: #172554;
+      font: inherit;
+      font-size: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .gnd-admin-login-form input::placeholder {
+      color: #94a3b8;
+    }
+
+    .gnd-admin-login-form input:focus {
+      border-color: #3b82f6;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+    }
+
+    #adminLoginMessage {
+      min-height: 18px;
+      margin: 5px 0 0;
+      color: #dc2626;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .gnd-admin-login-form button {
+      width: 100%;
+      min-height: 51px;
+      margin-top: 4px;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.2);
+      color: #ffffff;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    }
+
+    .gnd-admin-login-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.28);
+      filter: brightness(1.04);
+    }
+
+    .gnd-admin-login-form button:active {
+      transform: translateY(0);
+    }
+
+    .gnd-admin-login-form button:focus-visible,
+    .gnd-admin-login-back:focus-visible {
+      outline: 3px solid #93c5fd;
+      outline-offset: 3px;
+    }
+
+    .gnd-admin-login-note {
+      margin: 23px 0 0;
+      padding: 12px 14px;
+      border: 1px solid #dbeafe;
+      border-radius: 11px;
+      background: #eff6ff;
+      color: #64748b;
+      font-size: 11px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .gnd-admin-login-note::before {
+      content: "ⓘ ";
+      color: #2563eb;
+      font-weight: 800;
+    }
+
+    @keyframes adminCardIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Dark mode */
+    body.gnd-admin-login-body.gnd-dark-mode {
+      --admin-text: #eff6ff;
+      --admin-muted: #a9bbd4;
+      --admin-border: #334b70;
+      --admin-card: #14233b;
+
+      background:
+        radial-gradient(
+          circle at 12% 15%,
+          rgba(37, 99, 235, 0.2),
+          transparent 35%
+        ),
+        linear-gradient(135deg, #081326, #101f38 55%, #0c172b);
+    }
+
+    .gnd-dark-mode .gnd-admin-login-card {
+      border-color: #283d5e;
+      box-shadow: 0 24px 65px rgba(0, 0, 0, 0.3);
+    }
+
+    .gnd-dark-mode .gnd-admin-login-form label {
+      color: #dbeafe;
+    }
+
+    .gnd-dark-mode .gnd-admin-login-form input {
+      color: #eff6ff;
+      background: #0d1b30;
+      border-color: #334b70;
+    }
+
+    .gnd-dark-mode .gnd-admin-login-form input::placeholder {
+      color: #8498b7;
+    }
+
+    .gnd-dark-mode .gnd-admin-login-form input:focus {
+      border-color: #60a5fa;
+      background: #10213a;
+    }
+
+    .gnd-dark-mode .gnd-admin-login-note {
+      color: #b5c6df;
+      background: #192e4c;
+      border-color: #334b70;
+    }
+
+    @media (max-width: 480px) {
+      body.gnd-admin-login-body {
+        padding: 16px;
+      }
+
+      .gnd-admin-login-card {
+        padding: 26px 22px;
+        border-radius: 22px;
+      }
+
+      .gnd-admin-login-back {
+        margin-bottom: 24px;
+      }
+
+      .gnd-admin-login-logo {
+        width: 68px;
+        height: 68px;
+        border-radius: 21px;
+        font-size: 33px;
+      }
+
+      .gnd-admin-login-card h1 {
+        font-size: 26px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="gnd-admin-login-body">
+  <main class="gnd-admin-login-card">
+    <a href="login.html" class="gnd-admin-login-back">
+      <span aria-hidden="true">←</span>
+      <span>Kembali</span>
+    </a>
+
+    <div class="gnd-admin-login-logo" aria-hidden="true">🧺</div>
+
+    <span class="gnd-admin-login-label">GLOW N DRY</span>
+
+    <h1>Login Admin</h1>
+
+    <p class="gnd-admin-login-desc">
+      Selamat datang kembali! Masuk untuk mengelola pesanan laundry.
+    </p>
+
+    <form id="adminLoginForm" class="gnd-admin-login-form">
+      <label for="adminUsername">Username Admin</label>
+      <input
+        id="adminUsername"
+        name="username"
+        type="text"
+        autocomplete="username"
+        placeholder="Masukkan username admin"
+        required
+      >
+
+      <label for="adminPassword">Password Admin</label>
+      <input
+        id="adminPassword"
+        name="password"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Masukkan password admin"
+        required
+      >
+
+      <p id="adminLoginMessage" role="status" aria-live="polite"></p>
+
+      <button type="submit">Masuk ke Panel Admin →</button>
+    </form>
+
+    <p class="gnd-admin-login-note">
+      Halaman demo lokal. Gunakan akun admin yang ditetapkan di kode proyek.
+    </p>
+  </main>
+
+  <script src="../js/admin-login.js"></script>
+  <script src="../js/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,789 @@
+
+/* =================================
+   GLOW N DRY - STYLE UTAMA
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #0878d1;
+    --primary-dark: #0758ad;
+    --light-blue: #eaf6ff;
+    --background: #f3f8ff;
+    --white: #ffffff;
+    --text: #10244b;
+    --muted: #64748b;
+    --border: #dce9f6;
+    --shadow: 0 8px 25px rgba(25, 90, 150, 0.10);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* HALAMAN PEMBUKA */
+
+.welcome-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    background:
+        radial-gradient(circle at top left, #d8efff, transparent 45%),
+        linear-gradient(145deg, #f8fbff, #e8f4ff);
+}
+
+.welcome-card {
+    width: 100%;
+    max-width: 410px;
+    padding: 32px 26px 24px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #e0edfa;
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.brand-logo {
+    margin-bottom: 18px;
+}
+
+.logo-icon {
+    display: block;
+    font-size: 45px;
+    color: var(--primary);
+    line-height: 1.2;
+}
+
+.brand-logo h1 {
+    color: var(--primary-dark);
+    font-size: 29px;
+    font-weight: 800;
+    margin-top: 5px;
+}
+
+/* ILUSTRASI MESIN CUCI */
+
+.welcome-image {
+    position: relative;
+    width: 220px;
+    height: 190px;
+    margin: 22px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(145deg, #edf8ff, #d8edff);
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.washing-machine {
+    position: relative;
+    width: 130px;
+    height: 145px;
+    border-radius: 15px;
+    border: 4px solid #b3dcf8;
+    background: linear-gradient(135deg, #ffffff, #a9d9fa);
+    box-shadow: 0 10px 20px rgba(18, 104, 174, 0.18);
+    z-index: 1;
+}
+
+.machine-door {
+    position: absolute;
+    width: 82px;
+    height: 82px;
+    left: 20px;
+    top: 42px;
+    border: 8px solid #1687d5;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #b8ecff, #218bc9 65%, #075a9f);
+    box-shadow: inset 0 0 0 3px #ffffff;
+}
+
+.machine-shine {
+    position: absolute;
+    width: 17px;
+    height: 30px;
+    top: 8px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 50%;
+    transform: rotate(35deg);
+}
+
+.machine-buttons {
+    position: absolute;
+    top: 15px;
+    right: 12px;
+    width: 8px;
+    height: 8px;
+    background: #1687d5;
+    border-radius: 50%;
+    box-shadow: -15px 0 #1687d5;
+}
+
+.soap-bubbles {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffffff, #b9e5ff);
+    border: 1px solid #a5d9fb;
+}
+
+.bubble-one {
+    width: 27px;
+    height: 27px;
+    top: 25px;
+    left: 22px;
+}
+
+.bubble-two {
+    width: 19px;
+    height: 19px;
+    right: 23px;
+    top: 55px;
+}
+
+.bubble-three {
+    width: 15px;
+    height: 15px;
+    bottom: 22px;
+    left: 30px;
+}
+
+/* TEKS DAN TOMBOL */
+
+.welcome-card h2 {
+    font-size: 20px;
+    line-height: 1.5;
+    margin: 18px 0 12px;
+}
+
+.welcome-card > p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.btn-primary {
+    display: block;
+    width: 100%;
+    margin: 24px 0 18px;
+    padding: 15px 20px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #138de4, #0862c5);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 5px 14px rgba(8, 120, 209, 0.2);
+    transition: 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.welcome-card .welcome-footer {
+    font-size: 12px;
+    color: #8294ad;
+}
+
+/* TAMPILAN HP */
+
+@media (max-width: 480px) {
+    .welcome-page {
+        padding: 16px;
+    }
+
+    .welcome-card {
+        padding: 25px 20px;
+        border-radius: 24px;
+    }
+
+    .brand-logo h1 {
+        font-size: 26px;
+    }
+
+    .welcome-image {
+        width: 200px;
+        height: 175px;
+    }
+
+    .welcome-card h2 {
+        font-size: 19px;
+    }
+}
+
+.admin-entry-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 18px;
+  margin-top: 12px;
+  border: 1.5px solid #2864c8;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #2864c8;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: 0.2s ease;
+}
+
+.admin-entry-button:hover {
+  background: #edf4ff;
+  transform: translateY(-1px);
+}
+
+
+/* =========================================
+   GLOW N DRY — BLUE THEME 💙
+   Dominan biru, putih, dan biru muda
+========================================= */
+
+:root {
+  --gnd-green: #2878d0;
+  --gnd-green-dark: #1455a0;
+  --gnd-green-light: #eaf3ff;
+  --gnd-blue-light: #eef5ff;
+  --gnd-white: #ffffff;
+  --gnd-text: #172c48;
+  --gnd-muted: #718198;
+  --gnd-border: #dce7f5;
+  --gnd-shadow: 0 12px 35px rgba(37, 99, 180, 0.09);
+}
+
+/* Latar belakang halaman */
+body.gnd-create-order-body {
+  background:
+    radial-gradient(
+      circle at 10% 5%,
+      rgba(190, 217, 255, 0.55),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #f4f8ff 0%, #eaf2ff 100%);
+  color: var(--gnd-text);
+}
+
+/* Header */
+.gnd-page-header h1 {
+  color: #173e70;
+}
+
+.gnd-page-header p {
+  color: #72829a;
+}
+
+.gnd-page-back {
+  background: #ffffff;
+  color: #2168b8;
+  border: 1px solid #e0eafa;
+  box-shadow: 0 5px 16px rgba(37, 99, 180, 0.09);
+}
+
+.gnd-page-back:hover {
+  background: #eaf3ff;
+}
+
+/* Banner biru */
+.gnd-create-order-banner {
+  background: linear-gradient(135deg, #1455a0 0%, #2878d0 55%, #59a4f5 100%);
+  box-shadow: 0 14px 30px rgba(31, 105, 192, 0.22);
+}
+
+.gnd-create-order-banner::after {
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.gnd-create-order-banner h2 {
+  color: #ffffff;
+}
+
+.gnd-create-order-banner p,
+.gnd-create-order-banner span {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.gnd-create-order-icon {
+  background: rgba(255, 255, 255, 0.17);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Kartu formulir */
+.gnd-create-order-card {
+  background: #ffffff;
+  border-color: #dfE9f8;
+  box-shadow: 0 12px 32px rgba(37, 99, 180, 0.07);
+}
+
+.gnd-create-order-card h2 {
+  color: #183e6b;
+}
+
+/* Label */
+.gnd-create-order-form label:not(.gnd-payment-option) {
+  color: #385473;
+}
+
+/* Input */
+.gnd-create-order-form input:not([type="radio"]),
+.gnd-create-order-form select,
+.gnd-create-order-form textarea {
+  border-color: #d6e3f5;
+  background: #f8faff;
+  color: #213b5b;
+}
+
+.gnd-create-order-form input:focus,
+.gnd-create-order-form select:focus,
+.gnd-create-order-form textarea:focus {
+  border-color: #3989e8;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(40, 120, 208, 0.12);
+}
+
+/* Kartu total harga */
+.gnd-order-total-card {
+  background: linear-gradient(145deg, #e8f2ff, #ffffff);
+  border-color: #d4e5fc;
+  box-shadow: 0 12px 30px rgba(37, 99, 180, 0.08);
+}
+
+.gnd-order-total-card span {
+  color: #647a98;
+}
+
+.gnd-order-total-card strong {
+  color: #2168b8;
+}
+
+.gnd-order-total-card .gnd-order-total-line {
+  border-top-color: #c9dcf7;
+}
+
+.gnd-order-total-line span {
+  color: #173e70;
+}
+
+.gnd-order-total-line strong {
+  color: #1455a0;
+}
+
+/* Pilihan metode pembayaran */
+.gnd-payment-option {
+  border-color: #dbe6f5;
+  background: #ffffff;
+}
+
+.gnd-payment-option:hover {
+  border-color: #76ace9;
+  background: #f8fbff;
+}
+
+.gnd-payment-option:has(input:checked) {
+  border-color: #2878d0 !important;
+  background: #edf5ff !important;
+  box-shadow: 0 0 0 3px rgba(40, 120, 208, 0.09);
+}
+
+/* Radio kecil dan bulat */
+.gnd-payment-option input[type="radio"] {
+  accent-color: #2878d0 !important;
+}
+
+.gnd-payment-icon {
+  background: #e5f0ff !important;
+}
+
+.gnd-payment-info strong {
+  color: #183e6b !important;
+}
+
+.gnd-payment-info small {
+  color: #718198 !important;
+}
+
+.gnd-payment-selected {
+  border-color: #d8e6f8;
+  background: #f1f6ff !important;
+  color: #315984 !important;
+}
+
+/* Tombol utama biru */
+.gnd-create-order-submit {
+  background: linear-gradient(135deg, #2878d0, #1455a0);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(40, 120, 208, 0.24);
+}
+
+.gnd-create-order-submit:hover {
+  background: linear-gradient(135deg, #3989e8, #1b63b4);
+  box-shadow: 0 12px 25px rgba(40, 120, 208, 0.3);
+}
+
+/* Tombol kembali */
+.gnd-create-order-cancel {
+  border-color: #d8e5f7;
+  background: #ffffff;
+  color: #2168b8;
+}
+
+.gnd-create-order-cancel:hover {
+  background: #eaf3ff;
+}
+
+/* Pesan validasi */
+.gnd-create-order-message:not(:empty) {
+  background: #fff4e5;
+  color: #8b5b19;
+}
+
+/* Navigasi bawah */
+.gnd-bottom-nav {
+  border-color: #e0eafa;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 -8px 30px rgba(37, 99, 180, 0.09);
+}
+
+.gnd-bottom-nav a {
+  color: #76869d;
+}
+
+.gnd-bottom-nav a:hover,
+.gnd-bottom-nav a:focus {
+  color: #2878d0;
+}
+
+/* Warna seleksi teks */
+::selection {
+  background: #cfe4ff;
+  color: #1455a0;
+}
+
+/* Tampilan HP */
+@media (max-width: 600px) {
+  .gnd-create-order-banner {
+    box-shadow: 0 10px 24px rgba(40, 120, 208, 0.17);
+  }
+}
+
+
+/* =====================================
+   GLOW N DRY - BLUE THEME FOR ALL PAGES
+===================================== */
+
+:root {
+  --gnd-primary: #2878d0;
+  --gnd-primary-dark: #1455a0;
+  --gnd-primary-light: #eaf3ff;
+  --gnd-background: #f3f7ff;
+  --gnd-card: #ffffff;
+  --gnd-text: #183451;
+  --gnd-muted: #718198;
+  --gnd-border: #dce7f5;
+}
+
+/* Latar seluruh halaman */
+body {
+  color: var(--gnd-text);
+  background-color: var(--gnd-background);
+}
+
+/* Judul */
+h1,
+h2,
+h3 {
+  color: #183e6b;
+}
+
+/* Kartu dan panel */
+[class*="card"],
+[class*="panel"] {
+  border-color: var(--gnd-border);
+}
+
+/* Input dan pilihan */
+input:not([type="radio"]):not([type="checkbox"]),
+select,
+textarea {
+  border-color: var(--gnd-border);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--gnd-primary) !important;
+  box-shadow: 0 0 0 3px rgba(40, 120, 208, 0.12);
+}
+
+/* Tombol utama */
+button,
+input[type="submit"],
+button[type="submit"],
+[class*="submit-btn"],
+[class*="primary-btn"] {
+  background-color: var(--gnd-primary);
+  border-color: var(--gnd-primary);
+  color: #ffffff;
+  transition: background-color 0.2s, transform 0.2s,
+    box-shadow 0.2s;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: var(--gnd-primary-dark);
+}
+
+/* Link */
+a {
+  transition: color 0.2s;
+}
+
+a:not([class*="button"]):not([class*="btn"]) {
+  color: var(--gnd-primary);
+}
+
+/* Tabel dashboard admin */
+table {
+  border-color: var(--gnd-border);
+}
+
+thead th {
+  background-color: #eaf3ff;
+  color: #183e6b;
+}
+
+tbody tr:hover {
+  background-color: #f4f8ff;
+}
+
+/* Tombol navigasi */
+nav a:hover {
+  color: var(--gnd-primary);
+}
+
+/* Warna pilihan radio dan checkbox */
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: var(--gnd-primary);
+}
+
+/* Tampilan layar HP */
+@media (max-width: 600px) {
+  button,
+  input[type="submit"] {
+    max-width: 100%;
+  }
+}
+
+
+/* ========================================
+   GLOW N DRY - GLOBAL DARK MODE
+======================================== */
+
+body.gnd-dark-mode {
+  color-scheme: dark;
+  background: #0b1220 !important;
+  color: #e7eef9 !important;
+}
+
+/* Teks utama */
+body.gnd-dark-mode h1,
+body.gnd-dark-mode h2,
+body.gnd-dark-mode h3,
+body.gnd-dark-mode h4,
+body.gnd-dark-mode label,
+body.gnd-dark-mode .gnd-setting-text strong,
+body.gnd-dark-mode .gnd-menu-text strong,
+body.gnd-dark-mode .gnd-history-total,
+body.gnd-dark-mode .gnd-profile-info-row strong {
+  color: #e7f0ff !important;
+}
+
+body.gnd-dark-mode p,
+body.gnd-dark-mode small {
+  color: #a8b8ce;
+}
+
+/* Kartu putih menjadi gelap */
+body.gnd-dark-mode [class*="-card"],
+body.gnd-dark-mode .gnd-settings-card,
+body.gnd-dark-mode .gnd-profile-info,
+body.gnd-dark-mode .gnd-profile-menu,
+body.gnd-dark-mode .gnd-history-empty,
+body.gnd-dark-mode .gnd-service-tile,
+body.gnd-dark-mode .gnd-setting-link,
+body.gnd-dark-mode .gnd-setting-row,
+body.gnd-dark-mode .gnd-active-order,
+body.gnd-dark-mode .gnd-history-filters,
+body.gnd-dark-mode .gnd-profile-modal {
+  background: #151f31 !important;
+  color: #e7eef9 !important;
+  border-color: #2a3a52 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Banner tetap berwarna biru */
+body.gnd-dark-mode .gnd-welcome,
+body.gnd-dark-mode .gnd-create-order-banner,
+body.gnd-dark-mode .gnd-profile-hero,
+body.gnd-dark-mode .gnd-history-summary {
+  background: linear-gradient(
+    135deg, #103e78, #1455a0, #2878d0
+  ) !important;
+  color: #ffffff !important;
+}
+
+body.gnd-dark-mode .gnd-welcome h1,
+body.gnd-dark-mode .gnd-welcome p,
+body.gnd-dark-mode .gnd-create-order-banner h2,
+body.gnd-dark-mode .gnd-create-order-banner p,
+body.gnd-dark-mode .gnd-profile-hero h2,
+body.gnd-dark-mode .gnd-profile-hero p,
+body.gnd-dark-mode .gnd-history-summary strong {
+  color: #ffffff !important;
+}
+
+/* Input dan area teks */
+body.gnd-dark-mode input:not([type="radio"]):not([type="checkbox"]),
+body.gnd-dark-mode select,
+body.gnd-dark-mode textarea {
+  background: #0f1929 !important;
+  color: #e7eef9 !important;
+  border-color: #354761 !important;
+}
+
+body.gnd-dark-mode input::placeholder,
+body.gnd-dark-mode textarea::placeholder {
+  color: #8497b2 !important;
+}
+
+body.gnd-dark-mode input:focus,
+body.gnd-dark-mode select:focus,
+body.gnd-dark-mode textarea:focus {
+  border-color: #579ce9 !important;
+  box-shadow: 0 0 0 3px rgba(65, 145, 230, 0.16) !important;
+}
+
+/* Baris dan pemisah */
+body.gnd-dark-mode .gnd-setting-row,
+body.gnd-dark-mode .gnd-setting-link,
+body.gnd-dark-mode .gnd-profile-info-row,
+body.gnd-dark-mode .gnd-profile-menu-item,
+body.gnd-dark-mode .gnd-history-card-top {
+  border-color: #2a3a52 !important;
+}
+
+/* Ikon */
+body.gnd-dark-mode .gnd-setting-icon,
+body.gnd-dark-mode .gnd-profile-info-icon,
+body.gnd-dark-mode .gnd-menu-icon,
+body.gnd-dark-mode .gnd-mini-icon,
+body.gnd-dark-mode .gnd-tile-icon,
+body.gnd-dark-mode .gnd-history-card-icon,
+body.gnd-dark-mode .gnd-history-meta-icon {
+  background: #1b3150 !important;
+  color: #86bdff !important;
+}
+
+/* Navigasi bawah */
+body.gnd-dark-mode .gnd-bottom-nav {
+  background: rgba(13, 22, 37, 0.98) !important;
+  border-color: #2a3a52 !important;
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.22) !important;
+}
+
+body.gnd-dark-mode .gnd-bottom-nav a,
+body.gnd-dark-mode .gnd-nav-item {
+  color: #93a5bd !important;
+}
+
+body.gnd-dark-mode .gnd-bottom-nav a.active,
+body.gnd-dark-mode .gnd-bottom-nav a.selected,
+body.gnd-dark-mode .gnd-nav-item.active {
+  color: #75b4ff !important;
+}
+
+/* Tombol sekunder */
+body.gnd-dark-mode .gnd-page-back,
+body.gnd-dark-mode .gnd-create-order-cancel,
+body.gnd-dark-mode .gnd-detail-button,
+body.gnd-dark-mode .gnd-history-detail,
+body.gnd-dark-mode .gnd-history-page .gnd-history-filter:not(.active) {
+  background: #172943 !important;
+  color: #9bc9ff !important;
+  border-color: #2b4565 !important;
+}
+
+/* Tombol utama tetap biru */
+body.gnd-dark-mode .gnd-create-order-submit,
+body.gnd-dark-mode .gnd-profile-edit,
+body.gnd-dark-mode .gnd-quick-button.primary {
+  background: linear-gradient(135deg, #3285dd, #1455a0) !important;
+  color: #ffffff !important;
+}
+
+/* Pilihan pembayaran */
+body.gnd-dark-mode .gnd-payment-option {
+  background: #101a2a !important;
+  color: #e7eef9 !important;
+  border-color: #2a3a52 !important;
+}
+
+body.gnd-dark-mode .gnd-payment-option:has(input:checked) {
+  background: #142945 !important;
+  border-color: #438de0 !important;
+}
+
+body.gnd-dark-mode .gnd-payment-option strong {
+  color: #e7f0ff !important;
+}
+
+/* Status dan informasi */
+body.gnd-dark-mode .gnd-estimate,
+body.gnd-dark-mode .gnd-history-total-box,
+body.gnd-dark-mode .gnd-payment-selected,
+body.gnd-dark-mode .gnd-settings-message:not(:empty) {
+  background: #101f34 !important;
+  border-color: #2a4464 !important;
+  color: #c4d9f5 !important;
+}
+
+/* Tombol keluar */
+body.gnd-dark-mode .gnd-profile-logout {
+  background: #351d2a !important;
+  color: #ff9aa8 !important;
+  border-color: #633040 !important;
+}
+
+/* Progres cucian */
+body.gnd-dark-mode .gnd-progress-line {
+  background: #2b3d57 !important;
+}
+
+body.gnd-dark-mode .gnd-progress-step span {
+  background: #152238 !important;
+  border-color: #354761 !important;
+  color: #a8b8ce !important;
+}
+
+body.gnd-dark-mode .gnd-progress-step.completed span,
+body.gnd-dark-mode .gnd-progress-step.active span {
+  background: #2878d0 !important;
+  border-color: #2878d0 !important;
+  color: white !important;
+}
